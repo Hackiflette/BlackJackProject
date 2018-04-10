@@ -26,6 +26,7 @@ def main():
     # Init pygame
     pygame.init()
     screen = pygame.display.set_mode((500, 310))
+    pygame.display.set_caption("Black Jack by Hackiflette")
 
     # Load background image
     bgd_tile = load_image("background_menu.png")
