@@ -1,7 +1,9 @@
 import re
+from typing import Union, Pattern
+
 
 class Card(object):
-    def __init__(self, value=1, color="hearts"):
+    def __init__(self, value: Union[int, str], color: str="hearts"):
         self._value = None
         self._color = None
         self.name = None
@@ -18,7 +20,7 @@ class Card(object):
                              "or integer between 1 and 13")
 
     @property
-    def color(self):
+    def color(self) -> str:
         return self._color
 
     @color.setter
@@ -41,10 +43,8 @@ class Card(object):
                 "\"SPADES\", their singular variant, or their first letter.\n"
                 "Case is not relevant.")
 
-
-
     @property
-    def value(self):
+    def value(self) -> int:
         return self._value
 
     @value.setter
@@ -55,27 +55,31 @@ class Card(object):
             self.name = valueToCardDict[arg]
         self._value = cardToValueDict[self.name]
 
-    def __radd__(self, other):
+    def __radd__(self, other: Union['Card', int]) -> int:
         if self.name == "ACE":
             if self._value + other <= 11:
                 return self._value + other + 10
         return self._value + other
-    def __add__(self, other):
+
+    def __add__(self, other: Union['Card', int]) -> int:
         if self.name == "ACE":
             if self._value + other <= 11:
                 return self._value + other + 10
         return self._value + other
-    def __int__(self):
+
+    def __int__(self) -> int:
         return self._value
-    def __repr__(self):
+
+    def __repr__(self) -> str:
         return "Card(value = %d, name = %s, color = %s)" % (self._value,
                                                             self.name,
                                                             self.color)
-    def __str__(self):
+
+    def __str__(self) -> str:
         return "%s of %s" % (self.name, self.color)
 
 
-cardNamesAndValues =  {
+cardNamesAndValues = {
     ("ACE", 1),
     ("TWO", 2),
     ("THREE", 3),
@@ -91,12 +95,19 @@ cardNamesAndValues =  {
     ("KING", 13),
     }
 
-cardToValueDict = {key : min(10,value) for (key, value) in cardNamesAndValues}
-valueToCardDict = {key : value for (value, key) in cardNamesAndValues}
+cardToValueDict = {key: min(10, value) for (key, value) in cardNamesAndValues}
+valueToCardDict = {key: value for (value, key) in cardNamesAndValues}
 colors = {"HEARTS", "SPADES", "CLUBS", "DIAMONDS"}
 
-# For example, replace "HEARTS" by "H(EART(S)?)?"
-# Allows matching "H",  "HEART" and "HEARTS"
-to_regexp = lambda string: re.compile(
-        string[0] + "(" + string[1:-1] + "(" + string[-1] + ")?)?"
-    )
+
+def to_regexp(string: str) -> Pattern[str]:
+    """
+    Creates a regular expression to match user inputs for color parameter
+    For example, replace "HEARTS" by "H(EART(S)?)?"
+    Allows matching "H",  "HEART" and "HEARTS"
+    :param str string: String to be changed to regular expression
+    :return: a regular expression
+    :rtype: str
+    """
+    string = string[0] + "(" + string[1:-1] + "(" + string[-1] + ")?)?"
+    return re.compile(string)

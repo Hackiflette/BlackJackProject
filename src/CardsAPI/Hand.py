@@ -1,23 +1,23 @@
 from .Card import Card
+from typing import List
+
 
 class Hand(object):
-    def __init__(self, cardList = None, isDealerHand = False):
+    def __init__(self, cardList: List[Card]=None, isDealerHand: bool=False):
         if cardList is None:
             cardList = []
         self.cardList = cardList
         self.isSplit = False
         self.isDealerHand = isDealerHand
 
-
-
     @property
-    def value(self):
+    def value(self) -> int:
         # without this sort, aces are always counted as 11
         self.cardList.sort(key=lambda x: x.value, reverse=True)
         return sum(self.cardList)
 
     @property
-    def isBlackjack(self):
+    def isBlackjack(self) -> bool:
         handSum = sum(self.cardList)
         if handSum == 21 and len(self.cardList) == 2 and not self.isSplit:
             return True
@@ -25,7 +25,7 @@ class Hand(object):
             return False
 
     @property
-    def isBurnt(self):
+    def isBurnt(self) -> bool:
         # without this sort, aces are always counted as 11
         self.cardList.sort(key=lambda x: x.value, reverse=True)
         handSum = sum(self.cardList)
@@ -34,21 +34,7 @@ class Hand(object):
         else:
             return False
 
-    """
-    @property
-    def handValue(self):
-        # without this sort, aces are always counted as 11
-        self.cardList.sort(key=lambda x: x.value, reverse=True)
-        handSum = sum(self.cardList)
-        if handSum == 21 and len(self.cardList) == 2 and not self.isSplit:
-            return HandValue(value=21, blackjack=True)
-        elif handSum > 21:
-            return HandValue(value=handSum, burnt=True)
-        else:
-            return HandValue(value=handSum)
-    """
-
-    def __gt__(self, other):
+    def __gt__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
         if self.isBlackjack and not other.isBlackjack:
@@ -62,12 +48,12 @@ class Hand(object):
         else:
             return False
 
-    def __lt__(self, other):
+    def __lt__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
         return not self.__gt__(other) and not self.__eq__(other)
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
         if self.isBlackjack and other.isBlackjack:
@@ -81,50 +67,36 @@ class Hand(object):
         else:
             return False
 
-    def __ge__(self, other):
+    def __ge__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
         return not self.__lt__(other)
 
-    def __le__(self, other):
+    def __le__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
         return not self.__gt__(other)
 
-    def __ne__(self, other):
+    def __ne__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
         return not self.__eq__(other)
 
-    def __add__(self, card):
+    def __add__(self, card: Card) -> 'Hand':
         if not isinstance(card, Card):
             return NotImplemented
         self.cardList.append(card)
         return self
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Hand(cardList={}, isDealerHand={})".format(self.cardList,
                                                            self.isDealerHand)
-    def __str__(self):
+
+    def __str__(self) -> str:
         if self.isDealerHand:
             owner = "Dealer"
         else:
             owner = "Player"
         return "{} Hand : {}".format(owner, self.cardList)
 
-    def __iadd__(self, card):
-        if not isinstance(card, Card):
-            return NotImplemented
-        self.cardList.append(card)
-        return self
-"""
 
-class HandValue:
-    def __init__(self,
-                 value: int,
-                 burnt: bool = False,
-                 blackjack: bool = False):
-        self.value = value
-        self.burnt = burnt
-        self.blackjack = blackjack
-"""
