@@ -1,5 +1,5 @@
 from .Card import Card
-from typing import List
+from typing import List, Tuple
 
 
 class Hand(object):
@@ -35,6 +35,25 @@ class Hand(object):
         else:
             return False
 
+    def split(self) -> Tuple['Hand', 'Hand']:
+        """
+        Performs a split action. Returns two instances of Hand.
+        The methods checks for number of cards in the original Hand (which
+        should be 2) and for equality of the two cards' values
+        :return: The two resulting hands in a tuple
+        :raise: AssertionError
+        """
+        assert len(self.cardList) == 2
+        assert self.cardList[0].value == self.cardList[1].value
+        return (self.__class__([self.cardList[0]]),
+                self.__class__([self.cardList[1]]))
+
+    """
+    The following are comparison methods for comparing Hand objects. All 
+    standard comparison operators are defined and take into account the fact 
+    that a Hand can be a blackjack or not and that it can belong to the 
+    dealer or not
+    """
     def __gt__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
@@ -84,6 +103,11 @@ class Hand(object):
         return not self.__eq__(other)
 
     def __add__(self, card: Card) -> 'Hand':
+        """
+        Adds a card to the Hand, using "hand = hand + card" or "hand += card"
+        :param card: a Card object to append to the Hand's cardList
+        :return: The Hand itself
+        """
         if not isinstance(card, Card):
             return NotImplemented
         self.cardList.append(card)
