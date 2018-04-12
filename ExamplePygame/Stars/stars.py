@@ -50,7 +50,7 @@ def load_image(file):
 
 class Star(pygame.sprite.Sprite):
     """
-    A shouting star
+    A shooting star
     """
 
     speed = 2
