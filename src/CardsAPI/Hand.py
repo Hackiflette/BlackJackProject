@@ -13,8 +13,9 @@ class Hand(object):
     @property
     def value(self) -> int:
         # without this sort, aces are always counted as 11
-        self.cardList.sort(key=lambda x: x.value, reverse=True)
-        return sum(self.cardList)
+        sortedCardList = sorted(self.cardList, key=lambda x: x.value,
+                                reverse=True)
+        return sum(sortedCardList)
 
     @property
     def isBlackjack(self) -> bool:
@@ -98,5 +99,3 @@ class Hand(object):
         else:
             owner = "Player"
         return "{} Hand : {}".format(owner, self.cardList)
-
-
