@@ -1,3 +1,4 @@
+import itertools
 import random
 
 from .Card import Card, cardToValueDict, colors
@@ -5,20 +6,31 @@ from .Card import Card, cardToValueDict, colors
 
 class Deck:
     def __init__(self, SHUFFLE: bool=True):
-        self.cardList = [Card(name, color) for color in colors
-                         for name in cardToValueDict.keys()
-                         for _ in range(6)]  # 6 x (52-card decks)
+        self.cards = list(
+            itertools.product(cardToValueDict.keys(), colors)) * 6
+
         if SHUFFLE:
             self.shuffle()
 
-        # instantiates generator
-        self.generator = self._generator()
+        # index of the card on the top of the deck
+        self.topCardIndex = 0
 
-    def _generator(self):
-        yield from self.cardList
+        # index of the red card, when the dealer finds this card, he shuffles
+        # the deck. Usually placed around 3/4 of the deck
+        self.redCardIndex = random.randint(
+            (3/4) * len(self.cards) - 30, (3 / 4) * len(self.cards) + 30)
+        # TODO: find a cleaner way than -30 +30, like gaussian distribution
 
     def shuffle(self):
-        random.shuffle(self.cardList)
+        # shuffle deck
+        random.shuffle(self.cards)
+        # reset counter
+        self.topCardIndex = 0
 
     def deal(self) -> Card:
-        return next(self.generator)
+        self.topCardIndex += 1
+        if self.topCardIndex == self.redCardIndex:
+            self.shuffle()
+            # TODO: we should do it only at the end of a turn
+
+        return Card(*self.cards[self.topCardIndex])
