@@ -3,7 +3,7 @@
 		"size": [640, 480]
 	},
 	"images": {
-		"background": "images/background.gif",
-		"star": "images/star.gif"
+		"background": "background.gif",
+		"star": "star.gif"
 	}
 }
