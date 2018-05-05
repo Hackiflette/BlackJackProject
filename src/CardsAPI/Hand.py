@@ -3,11 +3,12 @@ from typing import List, Tuple
 
 
 class Hand(object):
-    def __init__(self, cardList: List[Card]=None, isDealerHand: bool=False):
+    def __init__(self, cardList: List[Card]=None, isDealerHand: bool=False,
+                 isSplit: bool = False):
         if cardList is None:
             cardList = []
         self.cardList = cardList
-        self.isSplit = False
+        self.isSplit = isSplit
         self.isDealerHand = isDealerHand
 
     @property
@@ -28,8 +29,9 @@ class Hand(object):
     @property
     def isBurnt(self) -> bool:
         # without this sort, aces are always counted as 11
-        self.cardList.sort(key=lambda x: x.value, reverse=True)
-        handSum = sum(self.cardList)
+        sortedCardList = sorted(self.cardList, key=lambda x: x.value,
+                                reverse=True)
+        handSum = sum(sortedCardList)
         if handSum > 21:
             return True
         else:
@@ -45,8 +47,8 @@ class Hand(object):
         """
         assert len(self.cardList) == 2
         assert self.cardList[0].value == self.cardList[1].value
-        return (self.__class__([self.cardList[0]]),
-                self.__class__([self.cardList[1]]))
+        return (self.__class__([self.cardList[0]], isSplit=True),
+                self.__class__([self.cardList[1]], isSplit=True))
 
     """
     The following are comparison methods for comparing Hand objects. All 
