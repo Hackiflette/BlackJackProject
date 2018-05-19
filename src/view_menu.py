@@ -9,15 +9,15 @@ DIR_PICTURES = os.path.join(os.path.dirname(DIR_SRC), "pictures")
 DIR_MENU_PICTURES = os.path.join(DIR_PICTURES, "menu")
 
 def load_image(file):
-	"""	Loads an image, prepares it for play """
+    """	Loads an image, prepares it for play """
 
-	file = os.path.join(DIR_MENU_PICTURES, file)
-	try:
-		surface = pygame.image.load(file)
-	except pygame.error:
-		error = "Could not load image \"%s\" %s"%(file, pygame.get_error())
-		raise SystemExit(error)
-	return surface.convert()
+    file = os.path.join(DIR_MENU_PICTURES, file)
+    try:
+        surface = pygame.image.load(file)
+    except pygame.error:
+        error = "Could not load image \"%s\" %s"%(file, pygame.get_error())
+        raise SystemExit(error)
+    return surface.convert()
 
 
 def main():
