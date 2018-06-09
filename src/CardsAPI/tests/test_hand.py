@@ -7,7 +7,7 @@ from src.CardsAPI import Card, Hand
 def test_init_hand():
 
     hand = Hand.Hand()
-    assert len(hand.cardList) == 0
+    assert len(hand.card_list) == 0
 
     hand = Hand.Hand([Card.Card(2)])
     assert hand.value == 2
