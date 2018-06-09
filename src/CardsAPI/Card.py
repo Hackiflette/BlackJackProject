@@ -51,7 +51,7 @@ class Card(object):
     def color(self, color: str = "HEARTS"):
         color = color.upper()
         for c in colors:
-            regexp = self.to_regexp(c).match(color)
+            regexp = self.toRegexp(c).match(color)
             if regexp is None:
                 # regexp.match returns None if nothing is matched,
                 # which will raise a error if end method is used on the
