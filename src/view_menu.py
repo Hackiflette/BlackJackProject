@@ -3,10 +3,12 @@ import os.path
 import pygame
 from pygame.locals import QUIT
 
-
 DIR_SRC = os.path.dirname(__file__)
+print(DIR_SRC)
 DIR_PICTURES = os.path.join(os.path.dirname(DIR_SRC), "pictures")
+print(DIR_PICTURES)
 DIR_MENU_PICTURES = os.path.join(DIR_PICTURES, "menu")
+
 
 def load_image(file):
     """	Loads an image, prepares it for play """
@@ -15,7 +17,7 @@ def load_image(file):
     try:
         surface = pygame.image.load(file)
     except pygame.error:
-        error = "Could not load image \"%s\" %s"%(file, pygame.get_error())
+        error = "Could not load image \"%s\" %s" % (file, pygame.get_error())
         raise SystemExit(error)
     return surface.convert()
 
