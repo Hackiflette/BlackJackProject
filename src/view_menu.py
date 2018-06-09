@@ -29,7 +29,7 @@ def main():
     pygame.display.set_caption("Black Jack by Hackiflette")
 
     # Load background image
-    bgd_tile = load_image("background_menu.png")
+    bgd_tile = load_image("bgd_menu.png")
     background = pygame.Surface((500, 310))
     background.blit(bgd_tile, (0, 0))
 
