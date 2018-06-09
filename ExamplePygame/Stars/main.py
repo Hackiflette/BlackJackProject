@@ -19,12 +19,6 @@ class Main:
 
     def __init__(self):
 
-        # Directories
-        self.dirMain = os.path.dirname(__file__)
-        self.dirFiles = os.path.join(self.dirMain, "files")
-        self.dirImages = os.path.join(self.dirMain, "images")
-        self.dirSounds = os.path.join(self.dirMain, "sounds")
-
         # Configuration
         self.load_config()
 

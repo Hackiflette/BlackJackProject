@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 import pygame
+
+from constants import DIRIMAGES
 
 
 def load_image(filename: str) -> pygame.Surface:
@@ -12,7 +16,7 @@ def load_image(filename: str) -> pygame.Surface:
     """
 
     try:
-        surface = pygame.image.load(filename)
+        surface = pygame.image.load(os.path.join(DIRIMAGES, filename))
     except pygame.error:
         error = "Could not load image \"%s\" %s" % (filename, pygame.get_error())
         raise SystemExit(error)
