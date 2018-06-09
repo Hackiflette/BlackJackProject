@@ -8,7 +8,7 @@ DIR_PICTURES = os.path.join(os.path.dirname(DIR_SRC), "pictures")
 DIR_MENU_PICTURES = os.path.join(DIR_PICTURES, "menu")
 
 
-def load_image(file):
+def loadImage(file):
     """	Loads an image, prepares it for play """
 
     file = os.path.join(DIR_MENU_PICTURES, file)
@@ -20,17 +20,15 @@ def load_image(file):
     return surface.convert()
 
 
-def main():
+def main(window, menu_config):
     """ The main function of the view of menu"""
 
-    # Init pygame
-    pygame.init()
-    screen = pygame.display.set_mode((500, 310))
-    pygame.display.set_caption("Black Jack by Hackiflette")
+    # Init window
+    screen = window
 
     # Load background image
-    bgd_tile = load_image("bgd_menu.png")
-    background = pygame.Surface((500, 310))
+    bgd_tile = loadImage("bgd_menu.png")
+    background = pygame.Surface((menu_config["width"], menu_config["height"]))
     background.blit(bgd_tile, (0, 0))
 
     # Prepare text
@@ -65,6 +63,7 @@ def main():
         clock.tick(40)
 
     pygame.quit()
+    return '', dict()
 
 
 if __name__ == '__main__':
