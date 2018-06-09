@@ -33,7 +33,7 @@ class Main:
         Load the configuration file
         """
 
-        fileConfig = os.path.join(self.dirFiles, "config.json")
+        fileConfig = os.path.join(DIRFILES, "config.json")
         with open(fileConfig, "r", encoding="utf-8") as f:
             self.config = json.load(f)
 
