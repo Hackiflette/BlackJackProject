@@ -1,0 +1,10 @@
+{
+    "folders": {
+        "main": ["."],
+        "data": ["data"],
+        "config": ["data", "config"],
+        "pictures": ["data", "pictures"],
+        "cards": ["data", "pictures", "cards"],
+        "src": ["src"]
+    }
+}
