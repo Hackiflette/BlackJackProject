@@ -3,36 +3,36 @@ from typing import List, Tuple
 
 
 class Hand(object):
-    def __init__(self, cardList: List[Card]=None, isDealerHand: bool=False,
+    def __init__(self, card_list: List[Card]=None, is_dealer_hand: bool=False,
                  isSplit: bool = False):
-        if cardList is None:
-            cardList = []
-        self.cardList = cardList
-        self.isSplit = isSplit
-        self.isDealerHand = isDealerHand
+        if card_list is None:
+            card_list = []
+        self.card_list = card_list
+        self.is_split = isSplit
+        self.is_dealer_hand = is_dealer_hand
 
     @property
     def value(self) -> int:
         # without this sort, aces are always counted as 11
-        sortedCardList = sorted(self.cardList, key=lambda x: x.value,
+        sorted_card_list = sorted(self.card_list, key=lambda x: x.value,
                                 reverse=True)
-        return sum(sortedCardList)
+        return sum(sorted_card_list)
 
     @property
-    def isBlackjack(self) -> bool:
-        handSum = sum(self.cardList)
-        if handSum == 21 and len(self.cardList) == 2 and not self.isSplit:
+    def is_black_jack(self) -> bool:
+        hand_sum = sum(self.card_list)
+        if hand_sum == 21 and len(self.card_list) == 2 and not self.is_split:
             return True
         else:
             return False
 
     @property
-    def isBurnt(self) -> bool:
+    def is_burnt(self) -> bool:
         # without this sort, aces are always counted as 11
-        sortedCardList = sorted(self.cardList, key=lambda x: x.value,
+        sorted_card_list = sorted(self.card_list, key=lambda x: x.value,
                                 reverse=True)
-        handSum = sum(sortedCardList)
-        if handSum > 21:
+        hand_sum = sum(sorted_card_list)
+        if hand_sum > 21:
             return True
         else:
             return False
@@ -45,10 +45,10 @@ class Hand(object):
         :return: The two resulting hands in a tuple
         :raise: AssertionError
         """
-        assert len(self.cardList) == 2
-        assert self.cardList[0].value == self.cardList[1].value
-        return (self.__class__([self.cardList[0]], isSplit=True),
-                self.__class__([self.cardList[1]], isSplit=True))
+        assert len(self.card_list) == 2
+        assert self.card_list[0].value == self.card_list[1].value
+        return (self.__class__([self.card_list[0]], isSplit=True),
+                self.__class__([self.card_list[1]], isSplit=True))
 
     """
     The following are comparison methods for comparing Hand objects. All 
@@ -59,13 +59,13 @@ class Hand(object):
     def __gt__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
-        if self.isBlackjack and not other.isBlackjack:
+        if self.is_black_jack and not other.is_black_jack:
             return True
-        elif other.isBurnt and not self.isBurnt:
+        elif other.is_burnt and not self.is_burnt:
             return True
-        elif self.isBurnt and other.isBurnt and self.isDealerHand:
+        elif self.is_burnt and other.is_burnt and self.is_dealer_hand:
             return True
-        elif self.value > other.value and not self.isBurnt:
+        elif self.value > other.value and not self.is_burnt:
             return True
         else:
             return False
@@ -78,13 +78,13 @@ class Hand(object):
     def __eq__(self, other: 'Hand') -> bool:
         if not isinstance(other, Hand):
             return NotImplemented
-        if self.isBlackjack and other.isBlackjack:
+        if self.is_black_jack and other.is_black_jack:
             return True
-        elif self.isBurnt and other.isBurnt and not self.isDealerHand \
-                and not other.isDealerHand:
+        elif self.is_burnt and other.is_burnt and not self.is_dealer_hand \
+                and not other.is_dealer_hand:
             return True
         elif self.value == other.value and not \
-                self.isBlackjack and not other.isBlackjack:
+                self.is_black_jack and not other.is_black_jack:
             return True
         else:
             return False
@@ -107,21 +107,21 @@ class Hand(object):
     def __add__(self, card: Card) -> 'Hand':
         """
         Adds a card to the Hand, using "hand = hand + card" or "hand += card"
-        :param card: a Card object to append to the Hand's cardList
+        :param card: a Card object to append to the Hand's card_list
         :return: The Hand itself
         """
         if not isinstance(card, Card):
             return NotImplemented
-        self.cardList.append(card)
+        self.card_list.append(card)
         return self
 
     def __repr__(self) -> str:
-        return "Hand(cardList={}, isDealerHand={})".format(self.cardList,
-                                                           self.isDealerHand)
+        return "Hand(card_list={}, is_dealer_hand={})".format(self.card_list,
+                                                            self.is_dealer_hand)
 
     def __str__(self) -> str:
-        if self.isDealerHand:
+        if self.is_dealer_hand:
             owner = "Dealer"
         else:
             owner = "Player"
-        return "{} Hand : {}".format(owner, self.cardList)
+        return "{} Hand : {}".format(owner, self.card_list)

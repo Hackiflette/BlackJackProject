@@ -1,6 +1,30 @@
 import re
 from typing import Union, Pattern
 
+card_names_and_values = {
+    ("ACE", 1),
+    ("TWO", 2),
+    ("THREE", 3),
+    ("FOUR", 4),
+    ("FIVE", 5),
+    ("SIX", 6),
+    ("SEVEN", 7),
+    ("EIGHT", 8),
+    ("NINE", 9),
+    ("TEN", 10),
+    ("JACK", 11),
+    ("QUEEN", 12),
+    ("KING", 13),
+    }
+
+card_to_value_dict = {
+    key: min(10, value) for (key, value) in card_names_and_values
+}
+value_to_card_dict = {
+    key: value for (value, key) in card_names_and_values
+}
+colors = {"HEARTS", "SPADES", "CLUBS", "DIAMONDS"}
+
 
 class Card(object):
     def __init__(self, value: Union[int, str], color: str="hearts"):
@@ -27,7 +51,7 @@ class Card(object):
     def color(self, color: str = "HEARTS"):
         color = color.upper()
         for c in colors:
-            regexp = to_regexp(c).match(color)
+            regexp = self.to_regexp(c).match(color)
             if regexp is None:
                 # regexp.match returns None if nothing is matched,
                 # which will raise a error if end method is used on the
@@ -52,8 +76,8 @@ class Card(object):
         if isinstance(arg, str):
             self.name = arg.upper()
         elif isinstance(arg, int):
-            self.name = valueToCardDict[arg]
-        self._value = cardToValueDict[self.name]
+            self.name = value_to_card_dict[arg]
+        self._value = card_to_value_dict[self.name]
 
     def __radd__(self, other: Union['Card', int]) -> int:
         if self.name == "ACE":
@@ -78,36 +102,15 @@ class Card(object):
     def __str__(self) -> str:
         return "%s of %s" % (self.name, self.color)
 
-
-cardNamesAndValues = {
-    ("ACE", 1),
-    ("TWO", 2),
-    ("THREE", 3),
-    ("FOUR", 4),
-    ("FIVE", 5),
-    ("SIX", 6),
-    ("SEVEN", 7),
-    ("EIGHT", 8),
-    ("NINE", 9),
-    ("TEN", 10),
-    ("JACK", 11),
-    ("QUEEN", 12),
-    ("KING", 13),
-    }
-
-cardToValueDict = {key: min(10, value) for (key, value) in cardNamesAndValues}
-valueToCardDict = {key: value for (value, key) in cardNamesAndValues}
-colors = {"HEARTS", "SPADES", "CLUBS", "DIAMONDS"}
-
-
-def to_regexp(string: str) -> Pattern[str]:
-    """
-    Creates a regular expression to match user inputs for color parameter
-    For example, replace "HEARTS" by "H(EART(S)?)?"
-    Allows matching "H",  "HEART" and "HEARTS"
-    :param str string: String to be changed to regular expression
-    :return: a regular expression
-    :rtype: str
-    """
-    string = string[0] + "(" + string[1:-1] + "(" + string[-1] + ")?)?"
-    return re.compile(string)
+    @staticmethod
+    def to_regexp(string: str) -> Pattern[str]:
+        """
+        Creates a regular expression to match user inputs for color parameter
+        For example, replace "HEARTS" by "H(EART(S)?)?"
+        Allows matching "H",  "HEART" and "HEARTS"
+        :param str string: String to be changed to regular expression
+        :return: a regular expression
+        :rtype: str
+        """
+        string = string[0] + "(" + string[1:-1] + "(" + string[-1] + ")?)?"
+        return re.compile(string)
