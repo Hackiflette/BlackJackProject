@@ -20,7 +20,7 @@ def test_add_card():
     hand += card
     card = Card.Card(5)
     hand += card
-    assert len(hand.cardList) == 2
+    assert len(hand.card_list) == 2
     assert hand.value == 7
 
 
