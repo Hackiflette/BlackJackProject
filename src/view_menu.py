@@ -4,9 +4,7 @@ import pygame
 from pygame.locals import QUIT
 
 DIR_SRC = os.path.dirname(__file__)
-print(DIR_SRC)
 DIR_PICTURES = os.path.join(os.path.dirname(DIR_SRC), "pictures")
-print(DIR_PICTURES)
 DIR_MENU_PICTURES = os.path.join(DIR_PICTURES, "menu")
 
 
