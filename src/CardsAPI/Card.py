@@ -103,7 +103,7 @@ class Card(object):
         return "%s of %s" % (self.name, self.color)
 
     @staticmethod
-    def to_regexp(string: str) -> Pattern[str]:
+    def toRegexp(string: str) -> Pattern[str]:
         """
         Creates a regular expression to match user inputs for color parameter
         For example, replace "HEARTS" by "H(EART(S)?)?"
