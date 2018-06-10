@@ -12,7 +12,7 @@ import pygame
 from pygame.locals import *
 
 from src.common.constants import *
-from src import view_menu
+from src.views import view_menu
 
 # ============================================================================
 # =
