@@ -1,33 +1,20 @@
 import os.path
 
 import pygame
-from pygame.locals import QUIT
+from pygame.locals import *
 
-DIR_SRC = os.path.dirname(__file__)
-DIR_PICTURES = os.path.join(os.path.dirname(DIR_SRC), "pictures")
-DIR_MENU_PICTURES = os.path.join(DIR_PICTURES, "menu")
+from src.common.func_pictures import load_image
 
 
-def loadImage(file):
-    """	Loads an image, prepares it for play """
-
-    file = os.path.join(DIR_MENU_PICTURES, file)
-    try:
-        surface = pygame.image.load(file)
-    except pygame.error:
-        error = "Could not load image \"%s\" %s" % (file, pygame.get_error())
-        raise SystemExit(error)
-    return surface.convert()
-
-
-def main(window, menu_config):
+def main(window: pygame.Surface, menu_config: dict):
     """ The main function of the view of menu"""
 
     # Init window
     screen = window
+    state = -1
 
     # Load background image
-    bgd_tile = loadImage("bgd_menu.png")
+    bgd_tile = load_image("menu/bgd_menu.png")
     background = pygame.Surface((menu_config["width"], menu_config["height"]))
     background.blit(bgd_tile, (0, 0))
 
@@ -55,6 +42,12 @@ def main(window, menu_config):
         for event in pygame.event.get():
             if event.type == QUIT:
                 play = False
+            elif (event.type == KEYDOWN and event.key == K_RETURN):
+                state = 1
+                play = False
+            elif (event.type == KEYDOWN and event.key == K_ESCAPE):
+                state = 0
+                play = False
 
         # Update the scene
         dirty = all_sprites.draw(screen)
@@ -62,9 +55,9 @@ def main(window, menu_config):
 
         clock.tick(40)
 
-    pygame.quit()
-    return '', dict()
+    return state, dict()
 
 
 if __name__ == '__main__':
+
     main()
