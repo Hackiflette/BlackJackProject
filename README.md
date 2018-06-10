@@ -1,6 +1,7 @@
 # BlackJackProject
 
 [![Build Status](https://travis-ci.com/Hackiflette/BlackJackProject.svg?branch=bug_fix)](https://travis-ci.com/Hackiflette/BlackJackProject)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 This project is the first of the Hackiflette team !
 
