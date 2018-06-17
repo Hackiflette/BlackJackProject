@@ -63,12 +63,12 @@ class Main:
 
         state, param = view_menu.main(self.window, self.config["window"])
 
-        while state != 0:
+        while state != Game.quit:
 
-            if state == 1:
-                state, param = view_game.main(self.window, self.config["window"])
-            elif state == 2:
+            if state == Game.menu:
                 state, param = view_menu.main(self.window, self.config["window"])
+            elif state == Game.play:
+                state, param = view_game.main(self.window, self.config["window"])
             else:
                 state = 0
 

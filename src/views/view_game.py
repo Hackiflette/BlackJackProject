@@ -28,8 +28,8 @@ def main(window, menu_config):
     all_sprites = pygame.sprite.RenderUpdates()
     clock = pygame.time.Clock()
 
-    play = True
-    while play:
+    state = Game.play
+    while state == Game.play:
 
         # Clear all the sprites
         all_sprites.clear(screen, bgd_tile)
@@ -38,10 +38,9 @@ def main(window, menu_config):
         # Check for events
         for event in pygame.event.get():
             if event.type == QUIT:
-                play = False
+                state = Game.menu
             elif (event.type == KEYDOWN and event.key == K_ESCAPE):
-                state = 2
-                play = False
+                state = Game.menu
 
         # Update the scene
         dirty = all_sprites.draw(screen)
