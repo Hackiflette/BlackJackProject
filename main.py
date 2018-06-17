@@ -12,7 +12,7 @@ import pygame
 from pygame.locals import *
 
 from src.common.constants import *
-from src.views import view_menu
+from src.views import view_menu, view_game
 
 # ============================================================================
 # =
@@ -62,6 +62,15 @@ class Main:
         """
 
         state, param = view_menu.main(self.window, self.config["window"])
+
+        while state != Game.quit:
+
+            if state == Game.menu:
+                state, param = view_menu.main(self.window, self.config["window"])
+            elif state == Game.play:
+                state, param = view_game.main(self.window, self.config["window"])
+            else:
+                state = 0
 
         pygame.quit()
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import pygame
 from src.common.constants import *
 
 
