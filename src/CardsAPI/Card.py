@@ -51,7 +51,7 @@ class Card(object):
     def color(self, color: str = "HEARTS"):
         color = color.upper()
         for c in colors:
-            regexp = self.toRegexp(c).match(color)
+            regexp = self.cardColorToRegexp(c).match(color)
             if regexp is None:
                 # regexp.match returns None if nothing is matched,
                 # which will raise a error if end method is used on the
@@ -103,14 +103,14 @@ class Card(object):
         return "%s of %s" % (self.name, self.color)
 
     @staticmethod
-    def toRegexp(string: str) -> Pattern[str]:
+    def cardColorToRegexp(string: str) -> Pattern[str]:
         """
         Creates a regular expression to match user inputs for color parameter
         For example, replace "HEARTS" by "H(EART(S)?)?"
         Allows matching "H",  "HEART" and "HEARTS"
         :param str string: String to be changed to regular expression
         :return: a regular expression
-        :rtype: str
+        :rtype: Pattern[str]
         """
         string = string[0] + "(" + string[1:-1] + "(" + string[-1] + ")?)?"
         return re.compile(string)
