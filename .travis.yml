@@ -3,5 +3,11 @@ python:
   - "3.6"
 
 # Command to run tests
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get build-dep -qq python-pygame
+  - sudo apt-get install -qq python-pygame
 script:
   - python -m pytest
+virtualenv:
+  system_site_packages: true
