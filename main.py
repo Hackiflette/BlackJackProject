@@ -69,6 +69,8 @@ class Main:
                 state, param = view_menu.main(self.window, self.config["window"])
             elif state == Game.play:
                 state, param = view_game.main(self.window, self.config["window"])
+            elif state == Game.option:
+                state, param = view_game.main(self.window, self.config["window"])
             else:
                 state = 0
 

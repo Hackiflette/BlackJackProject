@@ -23,12 +23,14 @@ def main(window: pygame.Surface, menu_config: dict):
     title_text = title_font.render("Black Jack Project", 2, (255, 255, 255))
 
     core_font = pygame.font.Font(None, 30)
-    core_text = core_font.render('>>> Press Enter to begin <<<', 2, (255, 255, 255))
+    begin_text = core_font.render('>>> Press Enter to begin <<<', 2, (255, 255, 255))
+    option_text = core_font.render('Option (o)', 2, (255, 255, 255))
 
     # Display on windows
     screen.blit(background, (0, 0))
     screen.blit(title_text, (80, 30))
-    screen.blit(core_text, (280, 500))
+    screen.blit(option_text, (300, 300))
+    screen.blit(begin_text, (250, 500))
     pygame.display.flip()
 
     # Init sprites
