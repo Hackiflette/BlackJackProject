@@ -29,6 +29,8 @@ def main(window, menu_config):
     all_sprites = pygame.sprite.RenderUpdates()
     clock = pygame.time.Clock()
 
+
+
     state = Game.option
     while state == Game.option:
 
