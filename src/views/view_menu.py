@@ -1,4 +1,4 @@
-import os.path
+# import os.path
 
 import pygame
 from pygame.locals import *
