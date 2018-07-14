@@ -7,5 +7,3 @@ install:
   - pip3 install pygame
 script:
   - python -m pytest
-virtualenv:
-  system_site_packages: true
