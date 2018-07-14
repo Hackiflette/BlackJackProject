@@ -24,7 +24,7 @@ def main(window: pygame.Surface, menu_config: dict):
 
     core_font = pygame.font.Font(None, 30)
     begin_text = core_font.render('>>> Press Enter to begin <<<', 2, (255, 255, 255))
-    option_text = core_font.render('Option (o)', 2, (255, 255, 255))
+    option_text = core_font.render('Options (o)', 2, (255, 255, 255))
 
     # Display on windows
     screen.blit(background, (0, 0))
@@ -50,6 +50,8 @@ def main(window: pygame.Surface, menu_config: dict):
                 state = Game.quit
             elif event.type == KEYDOWN and event.key == K_RETURN:
                 state = Game.play
+            elif event.type == KEYDOWN and event.key == K_o:
+                state = Game.option
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
                 state = Game.quit
 

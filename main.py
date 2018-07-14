@@ -12,7 +12,7 @@ import pygame
 from pygame.locals import *
 
 from src.common.constants import *
-from src.views import view_menu, view_game
+from src.views import view_menu, view_game, view_option
 
 # ============================================================================
 # =
@@ -70,7 +70,7 @@ class Main:
             elif state == Game.play:
                 state, param = view_game.main(self.window, self.config["window"])
             elif state == Game.option:
-                state, param = view_game.main(self.window, self.config["window"])
+                state, param = view_option.main(self.window, self.config["window"])
             else:
                 state = 0
 
