@@ -8,6 +8,7 @@ from src.common.constants import *
 
 from src.Button import Button
 
+
 def main(window: pygame.Surface, menu_config: dict):
     """ The main function of the view of menu"""
 
@@ -36,14 +37,9 @@ def main(window: pygame.Surface, menu_config: dict):
     screen.blit(title_text, (80, 30))
     screen.blit(begin_text, (300, 200))
     screen.blit(option_text, (300, 300))
-<<<<<<< HEAD
     screen.blit(begin_text, (250, 500))
     btn_play.display(window)
-=======
     screen.blit(quit_text, (300, 400))
-
-
->>>>>>> b80c711c33dbe040d4c9d5cf9c1ef36332d1fa12
     pygame.display.flip()
 
     # Init sprites
