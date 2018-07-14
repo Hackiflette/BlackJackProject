@@ -9,12 +9,12 @@ import pygame
 # ============================================================================
 
 
-class Button(pygame.Rect):
+class Button:
     """
     A button to be displayed on screen
 
     :param pos: position of the button
-    :type pos: array of 2 elements
+    :type pos: 2-tuple
     :param width: width of the button
     :type width: int
     :param height: height of the button
@@ -25,20 +25,25 @@ class Button(pygame.Rect):
     :type command: function
     :param state: ["disabled", "enabled"]
     :type state: str
+    :param background: background of the Button
+    :type background: 3-tuple
     """
 
     def __init__(self, **kwargs):
 
-        self.__validKwargs = {"pos", "width", "height", "text"}
+        self.__validKwargs = {"pos", "width", "height", "text", "command",
+                              "state", "background"}
+        self.rect = pygame.Rect(0, 0, 0, 0)
+        self.text = "Button"
+        self.background = None
         self.__setFromKwargs(kwargs)
-        self.state = "disabled"
 
     def set(self, **kwargs):
         """
         Set the values
 
         :param pos: position of the button
-        :type pos: array of 2 elements
+        :type pos: 2-tuple
         :param width: width of the button
         :type width: int
         :param height: height of the button
@@ -49,6 +54,8 @@ class Button(pygame.Rect):
         :type command: function
         :param state: ["disabled", "enabled"]
         :type state: str
+        :param background: background of the Button
+        :type background: 3-tuple
         """
 
         self.__setFromKwargs(kwargs)
@@ -61,22 +68,31 @@ class Button(pygame.Rect):
         if self.state == "enabled":
             self.command()
 
+    def isClicked(self, pos):
+        """
+        Return True is the pos is in the Button
+        """
+
+        return self.rect.collidepoint(pos)
+
     def display(self, window):
         """
         Display the button on the window
         """
 
         core_font = pygame.font.Font(None, 30)
-        core_text = core_font.render('>>> Press Enter to begin <<<', 2, (255, 255, 255))
+        print(self.text)
+        core_text = core_font.render(self.text, 2, (0, 0, 0))
 
-        x_b, y_b = self.x, self.y
-        w_b, h_b = self.width, self.height
-        w_t, h_t = core_text.get_sire()
+        x_b, y_b = self.rect.x, self.rect.y
+        w_b, h_b = self.rect.width, self.rect.height
+        w_t, h_t = core_text.get_size()
 
         mid_x = x_b + (w_b - w_t) // 2
         mid_y = y_b + (h_b - h_t) // 2
 
-        window.blit(self, (self.x, self.y))
+        if self.background is not None:
+            pygame.draw.rect(window, self.background, self.rect)
         window.blit(core_text, (mid_x, mid_y))
 
     def __setFromKwargs(self, kwargs: dict):
@@ -87,18 +103,16 @@ class Button(pygame.Rect):
         self.__validateKwargs(kwargs.keys())
 
         if "pos" in kwargs:
-            self.x, self.y = kwargs["pos"]
+            self.rect.x, self.rect.y = kwargs["pos"]
 
         if "width" in kwargs:
-            self.width = kwargs["width"]
+            self.rect.width = kwargs["width"]
 
         if "height" in kwargs:
-            self.height = kwargs["height"]
+            self.rect.height = kwargs["height"]
 
         if "text" in kwargs:
             self.text = kwargs["text"]
-        else:
-            self.text = "Button"
 
         if "command" in kwargs:
             self.command = kwargs["command"]
@@ -106,6 +120,9 @@ class Button(pygame.Rect):
 
         if "state" in kwargs:
             self.state = kwargs["state"]
+
+        if "background" in kwargs:
+            self.background = kwargs["background"]
 
     def __validateKwargs(self, kwargs: dict):
         """
@@ -124,9 +141,9 @@ class Button(pygame.Rect):
         """
 
         txt = "Button:\n"
-        txt += "- pos (%d, %d)\n" % (self.x, self.y)
-        txt += "- width %d\n" % self.width
-        txt += "- height %d\n" % self.height
+        txt += "- pos (%d, %d)\n" % (self.rect.x, self.rect.y)
+        txt += "- width %d\n" % self.rect.width
+        txt += "- height %d\n" % self.rect.height
         txt += "- text %s\n" % self.text
 
         return txt
