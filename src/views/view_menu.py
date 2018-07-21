@@ -3,8 +3,8 @@
 import pygame
 from pygame.locals import *
 
+import src.common.constants as c
 from src.common.func_pictures import load_image
-from src.common.constants import *
 
 from src.Button import Button
 
@@ -45,8 +45,8 @@ def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
     all_sprites = pygame.sprite.RenderUpdates()
     clock = pygame.time.Clock()
 
-    state = Game.menu
-    while state == Game.menu:
+    state = c.Game.menu
+    while state == c.Game.menu:
 
         # Clear all the sprites
         all_sprites.clear(screen, bgd_tile)
@@ -55,19 +55,19 @@ def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
         # Check for events
         for event in pygame.event.get():
             if event.type == QUIT:
-                state = Game.quit
+                state = c.Game.quit
             elif event.type == KEYDOWN and event.key == K_RETURN:
-                state = Game.play
+                state = c.Game.play
             elif event.type == KEYDOWN and event.key == K_o:
-                state = Game.option
+                state = c.Game.option
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                state = Game.quit
+                state = c.Game.quit
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
                 if btn_play.isClicked(pos):
                     btn_play.execute()
-                    state = Game.play
+                    state = c.Game.play
 
         # Update the scene
         dirty = all_sprites.draw(screen)

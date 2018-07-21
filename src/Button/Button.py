@@ -81,7 +81,6 @@ class Button:
         """
 
         core_font = pygame.font.Font(None, 30)
-        print(self.text)
         core_text = core_font.render(self.text, 2, (0, 0, 0))
 
         x_b, y_b = self.rect.x, self.rect.y

@@ -1,14 +1,14 @@
 import pygame
 from pygame.locals import *
 
-from src.common.constants import *
+import src.common.constants as c
 from src.common.func_pictures import load_image
+
 
 def main(window, menu_config):
     """ The main function of the view of options"""
 
-
-  # Init window
+    # Init window
     screen = window
 
     # Load background image
@@ -29,10 +29,8 @@ def main(window, menu_config):
     all_sprites = pygame.sprite.RenderUpdates()
     clock = pygame.time.Clock()
 
-
-
-    state = Game.option
-    while state == Game.option:
+    state = c.Game.option
+    while state == c.Game.option:
 
         # Clear all the sprites
         all_sprites.clear(screen, bgd_tile)
@@ -41,9 +39,9 @@ def main(window, menu_config):
         # Check for events
         for event in pygame.event.get():
             if event.type == QUIT:
-                state = Game.menu
+                state = c.Game.menu
             elif (event.type == KEYDOWN and event.key == K_ESCAPE):
-                state = Game.menu
+                state = c.Game.menu
 
         # Update the scene
         dirty = all_sprites.draw(screen)
