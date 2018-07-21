@@ -9,7 +9,7 @@ from src.common.constants import *
 from src.Button import Button
 
 
-def main(window: pygame.Surface, menu_config: dict):
+def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
     """ The main function of the view of menu"""
 
     # Init window
@@ -29,17 +29,16 @@ def main(window: pygame.Surface, menu_config: dict):
     option_text = core_font.render('Options (o)', 2, (255, 255, 255))
     quit_text = core_font.render('Quit (Esc)', 2, (255, 255, 255))
 
-    btn_play = Button(pos=(40, 40), width=200, height=50, text="Jouer")
+    btn_play = Button(pos=(200, 60), width=200, height=50, text="Jouer")
     btn_play.set(command=lambda: print("Ok"))
 
     # Display on windows
     screen.blit(background, (0, 0))
     screen.blit(title_text, (80, 30))
-    screen.blit(begin_text, (300, 200))
-    screen.blit(option_text, (300, 300))
-    screen.blit(begin_text, (250, 500))
+    screen.blit(begin_text, (menu_buttons["play_btn"]["x"], menu_buttons["play_btn"]["y"]))
+    screen.blit(option_text, (menu_buttons["option_btn"]["x"], menu_buttons["option_btn"]["y"]))
+    screen.blit(quit_text, (menu_buttons["quit_btn"]["x"], menu_buttons["quit_btn"]["y"]))
     btn_play.display(window)
-    screen.blit(quit_text, (300, 400))
     pygame.display.flip()
 
     # Init sprites

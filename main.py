@@ -61,12 +61,12 @@ class Main:
         The mainloop the launch the game
         """
 
-        state, param = view_menu.main(self.window, self.config["window"])
+        state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
 
         while state != Game.quit:
 
             if state == Game.menu:
-                state, param = view_menu.main(self.window, self.config["window"])
+                state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
             elif state == Game.play:
                 state, param = view_game.main(self.window, self.config["window"])
             elif state == Game.option:
