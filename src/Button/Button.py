@@ -27,15 +27,26 @@ class Button:
     :type state: str
     :param background: background of the Button
     :type background: 3-tuple
+    :param color: text color
+    :type color: 3-tuple
+    :param border: border size
+    :type border: int
+    :param border_color: border color
+    :type border_color: 3-tuple
     """
 
     def __init__(self, **kwargs):
 
-        self.__validKwargs = {"pos", "width", "height", "text", "command",
-                              "state", "background"}
+        self.__validKwargs = {"pos", "width", "height", "text", "color", "background",
+                              "command", "state", "border", "border_color"}
         self.rect = pygame.Rect(0, 0, 0, 0)
         self.text = "Button"
+        self.color = (0, 0, 0)
         self.background = None
+        self.command = self.__emptyFunc
+        self.state = "enabled"
+        self.border = 0
+        self.border_color = (0, 0, 0)
         self.__setFromKwargs(kwargs)
 
     def set(self, **kwargs):
@@ -81,7 +92,7 @@ class Button:
         """
 
         core_font = pygame.font.Font(None, 30)
-        core_text = core_font.render(self.text, 2, (0, 0, 0))
+        core_text = core_font.render(self.text, 2, self.color)
 
         x_b, y_b = self.rect.x, self.rect.y
         w_b, h_b = self.rect.width, self.rect.height
@@ -92,6 +103,16 @@ class Button:
 
         if self.background is not None:
             pygame.draw.rect(window, self.background, self.rect)
+
+        if self.border > 0:
+            points = (
+                (x_b, y_b),
+                (x_b, y_b + h_b),
+                (x_b + w_b, y_b + h_b),
+                (x_b + w_b, y_b)
+            )
+            pygame.draw.lines(window, self.border_color, True, points, self.border)
+
         window.blit(core_text, (mid_x, mid_y))
 
     def __setFromKwargs(self, kwargs: dict):
@@ -113,6 +134,12 @@ class Button:
         if "text" in kwargs:
             self.text = kwargs["text"]
 
+        if "color" in kwargs:
+            self.color = kwargs["color"]
+
+        if "background" in kwargs:
+            self.background = kwargs["background"]
+
         if "command" in kwargs:
             self.command = kwargs["command"]
             self.state = "enabled"
@@ -120,8 +147,11 @@ class Button:
         if "state" in kwargs:
             self.state = kwargs["state"]
 
-        if "background" in kwargs:
-            self.background = kwargs["background"]
+        if "border" in kwargs:
+            self.border = kwargs["border"]
+
+        if "border_color" in kwargs:
+            self.border_color = kwargs["border_color"]
 
     def __validateKwargs(self, kwargs: dict):
         """
@@ -133,6 +163,9 @@ class Button:
                 err = "%s is not a valid argument : [%s]"
                 args = ", ".join(self.__validKwargs)
                 raise AttributeError(err % (key, args))
+
+    def __emptyFunc(self):
+        pass
 
     def __str__(self):
         """

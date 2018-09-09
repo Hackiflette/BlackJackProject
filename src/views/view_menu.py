@@ -24,12 +24,14 @@ def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
     title_font = pygame.font.Font(None, 44)
     title_text = title_font.render("Black Jack Project", 2, (255, 255, 255))
 
-    core_font = pygame.font.Font(None, 30)
+    # core_font = pygame.font.Font(None, 30)
     # begin_text = core_font.render('Start (Enter)', 2, (255, 255, 255))
     # option_text = core_font.render('Options (o)', 2, (255, 255, 255))
     # quit_text = core_font.render('Quit (Esc)', 2, (255, 255, 255))
 
-    btn_play = Button(pos=(300, 100), width=200, height=50, text="Start (Enter)")
+    btn_play = Button(pos=(300, 100), width=200, height=50, text="Start (Enter)",
+                      color=(255, 255, 255), border=2, border_color=(255, 255, 255),
+                      background=(0, 170, 140))
     btn_options = Button(pos=(300, 200), width=200, height=50, text="Options (o)")
     btn_quit = Button(pos=(300, 300), width=200, height=50, text="Quit (Esc)")
 
