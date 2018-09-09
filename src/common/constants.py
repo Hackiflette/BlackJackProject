@@ -32,13 +32,3 @@ class Game(Enum):
     menu = 1
     play = 2
     option = 3
-
-
-class Decision(Enum):
-    """
-    Class with decisions regarding Hands
-    """
-    stand = 0
-    hit = 1
-    double = 2
-    split = 3
