@@ -12,7 +12,7 @@ import json
 import pygame
 from pygame.locals import *
 
-import src.common.constants as c
+import src.common.constants as cst
 from src.views import view_menu, view_game, view_option
 
 # ============================================================================
@@ -43,7 +43,7 @@ class Main:
         Load the configuration file
         """
 
-        file_config = os.path.join(c.DIR_CONFIG, "ui.cfg.json")
+        file_config = os.path.join(cst.DIR_CONFIG, "ui.cfg.json")
         with open(file_config, "r", encoding="utf-8") as f:
             self.config = json.load(f)
 
@@ -64,13 +64,13 @@ class Main:
 
         state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
 
-        while state != c.Game.quit:
+        while state != cst.Game.quit:
 
-            if state == c.Game.menu:
+            if state == cst.Game.menu:
                 state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
-            elif state == c.Game.play:
+            elif state == cst.Game.play:
                 state, param = view_game.main(self.window, self.config["window"])
-            elif state == c.Game.option:
+            elif state == cst.Game.option:
                 state, param = view_option.main(self.window, self.config["window"])
             else:
                 state = 0
@@ -80,7 +80,7 @@ class Main:
 
 if __name__ == '__main__':
     print("Exists?")
-    for folder in [c.DIR_SRC, c.DIR_DATA, c.DIR_CONFIG, c.DIR_PICTURES]:
+    for folder in [cst.DIR_SRC, cst.DIR_DATA, cst.DIR_CONFIG, cst.DIR_PICTURES]:
         print(folder, os.path.exists(folder))
 
     Main()

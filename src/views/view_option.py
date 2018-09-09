@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-import src.common.constants as c
+import src.common.constants as cst
 from src.common.func_pictures import load_image
 
 
@@ -29,8 +29,8 @@ def main(window, menu_config):
     all_sprites = pygame.sprite.RenderUpdates()
     clock = pygame.time.Clock()
 
-    state = c.Game.option
-    while state == c.Game.option:
+    state = cst.Game.option
+    while state == cst.Game.option:
 
         # Clear all the sprites
         all_sprites.clear(screen, bgd_tile)
@@ -39,9 +39,9 @@ def main(window, menu_config):
         # Check for events
         for event in pygame.event.get():
             if event.type == QUIT:
-                state = c.Game.menu
+                state = cst.Game.menu
             elif (event.type == KEYDOWN and event.key == K_ESCAPE):
-                state = c.Game.menu
+                state = cst.Game.menu
 
         # Update the scene
         dirty = all_sprites.draw(screen)
