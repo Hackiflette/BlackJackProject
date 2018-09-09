@@ -25,20 +25,28 @@ def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
     title_text = title_font.render("Black Jack Project", 2, (255, 255, 255))
 
     core_font = pygame.font.Font(None, 30)
-    begin_text = core_font.render('Start (Enter)', 2, (255, 255, 255))
-    option_text = core_font.render('Options (o)', 2, (255, 255, 255))
-    quit_text = core_font.render('Quit (Esc)', 2, (255, 255, 255))
+    # begin_text = core_font.render('Start (Enter)', 2, (255, 255, 255))
+    # option_text = core_font.render('Options (o)', 2, (255, 255, 255))
+    # quit_text = core_font.render('Quit (Esc)', 2, (255, 255, 255))
 
-    btn_play = Button(pos=(200, 60), width=200, height=50, text="Jouer")
+    btn_play = Button(pos=(300, 100), width=200, height=50, text="Start (Enter)")
+    btn_options = Button(pos=(300, 200), width=200, height=50, text="Options (o)")
+    btn_quit = Button(pos=(300, 300), width=200, height=50, text="Quit (Esc)")
+
     btn_play.set(command=lambda: print("Ok"))
+    btn_options.set(command=lambda: print("Ok"))
+    btn_quit.set(command=lambda: print("Ok"))
 
     # Display on windows
     screen.blit(background, (0, 0))
     screen.blit(title_text, (80, 30))
-    screen.blit(begin_text, (menu_buttons["play_btn"]["x"], menu_buttons["play_btn"]["y"]))
-    screen.blit(option_text, (menu_buttons["option_btn"]["x"], menu_buttons["option_btn"]["y"]))
-    screen.blit(quit_text, (menu_buttons["quit_btn"]["x"], menu_buttons["quit_btn"]["y"]))
+    # screen.blit(begin_text, (menu_buttons["play_btn"]["x"], menu_buttons["play_btn"]["y"]))
+    # screen.blit(option_text, (menu_buttons["option_btn"]["x"], menu_buttons["option_btn"]["y"]))
+    # screen.blit(quit_text, (menu_buttons["quit_btn"]["x"], menu_buttons["quit_btn"]["y"]))
     btn_play.display(window)
+    btn_options.display(window)
+    btn_quit.display(window)
+
     pygame.display.flip()
 
     # Init sprites
@@ -68,7 +76,12 @@ def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
                 if btn_play.isClicked(pos):
                     btn_play.execute()
                     state = c.Game.play
-
+                elif btn_options.isClicked(pos):
+                    btn_options.execute()
+                    state = c.Game.option
+                elif btn_quit.isClicked(pos):
+                    btn_quit.execute()
+                    state = c.Game.quit
         # Update the scene
         dirty = all_sprites.draw(screen)
         pygame.display.update(dirty)
