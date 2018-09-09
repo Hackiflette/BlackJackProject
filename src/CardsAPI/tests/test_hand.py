@@ -40,10 +40,9 @@ def test_split_hand():
     assert hand_1.value == 3 and hand_2.value == 3
     assert hand_1 == hand_2
 
-    hand2 = Hand.Hand([Card.Card(3),
-                      Card.Card(4)])
+    hand2 = Hand.Hand([Card.Card(3), Card.Card(4)])
     try:
-        [h1, h2]= hand2.split()
+        h1, h2 = hand2.split()
         split = True
     except AssertionError:
         split = False
