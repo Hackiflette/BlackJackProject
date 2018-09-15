@@ -29,11 +29,14 @@ def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
     # option_text = core_font.render('Options (o)', 2, (255, 255, 255))
     # quit_text = core_font.render('Quit (Esc)', 2, (255, 255, 255))
 
-    btn_play = Button(pos=(300, 100), width=200, height=50, text="Start (Enter)",
+    btn_play = Button(pos=(menu_buttons['play_btn']['x'], menu_buttons['play_btn']['y']),
+                      width=200, height=50, text="Start (Enter)",
                       color=(255, 255, 255), border=2, border_color=(255, 255, 255),
                       background=(0, 170, 140))
-    btn_options = Button(pos=(300, 200), width=200, height=50, text="Options (o)")
-    btn_quit = Button(pos=(300, 300), width=200, height=50, text="Quit (Esc)")
+    btn_options = Button(pos=(menu_buttons['option_btn']['x'], menu_buttons['option_btn']['y']),
+                         width=200, height=50, text="Options (o)")
+    btn_quit = Button(pos=(menu_buttons['quit_btn']['x'], menu_buttons['quit_btn']['y']),
+                      width=200, height=50, text="Quit (Esc)")
 
     btn_play.set(command=lambda: print("Ok"))
     btn_options.set(command=lambda: print("Ok"))
