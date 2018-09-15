@@ -14,6 +14,7 @@ from pygame.locals import *
 
 import src.common.constants as cst
 from src.views import view_menu, view_game, view_option
+from src.controler.game_manager import Game_manager
 
 # ============================================================================
 # =
@@ -34,6 +35,7 @@ class Main:
 
         # Init pygame
         self.initPygame()
+        self.initControler()
 
         # mainloop
         self.mainloop()
@@ -57,6 +59,13 @@ class Main:
         self.window = pygame.display.set_mode((self.config["window"]["width"],
                                                self.config["window"]["height"]))
 
+    def initControler(self):
+        """
+        Initialize the game_manager
+        """
+
+        self.ctrl = Game_manager(self.window, self.config["window"])
+
     def mainloop(self):
         """
         The mainloop the launch the game
@@ -69,7 +78,8 @@ class Main:
             if state == cst.Game.menu:
                 state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
             elif state == cst.Game.play:
-                state, param = view_game.main(self.window, self.config["window"])
+                self.ctrl.game_launch()
+                # state, param = view_game.main(self.window, self.config["window"])
             elif state == cst.Game.option:
                 state, param = view_option.main(self.window, self.config["window"])
             else:
