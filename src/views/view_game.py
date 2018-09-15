@@ -5,6 +5,38 @@ import src.common.constants as cst
 from src.common.func_pictures import load_image
 
 
+class View_game():
+
+    def __init__(self, window, menu_config):
+
+        self.window = window
+        self.menu_config = menu_config
+        self.init_window()
+
+    def init_window(self):
+        # Init the window with background
+        bgd_tile = load_image("blackjack_table.png")
+        bgd_tile = pygame.transform.scale(bgd_tile, (self.menu_config["width"],
+                                                     self.menu_config["height"]))
+        background = pygame.Surface((self.menu_config["width"],
+                                     self.menu_config["height"]))
+        background.blit(bgd_tile, (0, 0))
+
+        # Display on windows
+        self.window.blit(background, (0, 0))
+        pygame.display.flip()
+
+        # Init sprites
+        all_sprites = pygame.sprite.RenderUpdates()
+
+        # Update the scene
+        dirty = all_sprites.draw(self.window)
+        pygame.display.update(dirty)
+
+    def refresh(self):
+
+        pass
+
 def main(window, menu_config):
     """ The main function of the view of the game"""
 
