@@ -79,6 +79,7 @@ class Main:
                 state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
             elif state == cst.Game.play:
                 self.ctrl.game_launch()
+                state = self.gameLoop()
                 # state, param = view_game.main(self.window, self.config["window"])
             elif state == cst.Game.option:
                 state, param = view_option.main(self.window, self.config["window"])
@@ -87,6 +88,22 @@ class Main:
 
         pygame.quit()
 
+    def gameLoop(self):
+        """
+        The loop of the game which communicate with controller
+        """
+        state = cst.Game.play
+        print("GameLoop")
+        while state == cst.Game.play:
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    state = cst.Game.menu
+                elif (event.type == KEYDOWN and event.key == K_ESCAPE):
+                    state = cst.Game.menu
+
+        print("gameloop")
+        return state
 
 if __name__ == '__main__':
     print("Exists?")
