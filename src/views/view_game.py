@@ -24,6 +24,8 @@ class View_game():
 
         # Test the add of a card on the window
         card_tile = load_image("cards\\2_of_clubs.png")
+        card_tile = pygame.transform.scale(card_tile, (cst.CONFIG_PICTURES['cards']['size']['width'],
+                                                       cst.CONFIG_PICTURES['cards']['size']['height']))
         background.blit(card_tile, (50, 50))
 
         # Display on windows
