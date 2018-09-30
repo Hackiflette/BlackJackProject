@@ -14,6 +14,7 @@ from pygame.locals import *
 
 import src.common.constants as cst
 from src.views import view_menu, view_game, view_option
+from src.controller.game_controller import Game_controller
 
 # ============================================================================
 # =
@@ -34,6 +35,7 @@ class Main:
 
         # Init pygame
         self.initPygame()
+        self.initControler()
 
         # mainloop
         self.mainloop()
@@ -57,6 +59,13 @@ class Main:
         self.window = pygame.display.set_mode((self.config["window"]["width"],
                                                self.config["window"]["height"]))
 
+    def initControler(self):
+        """
+        Initialize the game_manager
+        """
+
+        self.ctrl = Game_controller(self.window, self.config["window"])
+
     def mainloop(self):
         """
         The mainloop the launch the game
@@ -69,7 +78,9 @@ class Main:
             if state == cst.Game.menu:
                 state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
             elif state == cst.Game.play:
-                state, param = view_game.main(self.window, self.config["window"])
+                self.ctrl.game_launch()
+                state = self.gameLoop()
+                # state, param = view_game.main(self.window, self.config["window"])
             elif state == cst.Game.option:
                 state, param = view_option.main(self.window, self.config["window"])
             else:
@@ -77,6 +88,22 @@ class Main:
 
         pygame.quit()
 
+    def gameLoop(self):
+        """
+        The loop of the game which communicate with controller
+        """
+        state = cst.Game.play
+        print("GameLoop")
+        while state == cst.Game.play:
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    state = cst.Game.menu
+                elif (event.type == KEYDOWN and event.key == K_ESCAPE):
+                    state = cst.Game.menu
+
+        print("gameloop")
+        return state
 
 if __name__ == '__main__':
     print("Exists?")

@@ -15,4 +15,21 @@ def load_image(file):
     except pygame.error:
         error = "Could not load image \"%s\" %s" % (file, pygame.get_error())
         raise SystemExit(error)
-    return surface.convert()
+    return surface.convert_alpha()
+
+def convert_card_to_picture(card):
+    """
+    Return the picture name of a Card object
+    """
+
+    if card.value != 10:
+        value_name = str(card.value)
+    else:
+        if card.name == 'TEN':
+            value_name = str(card.value)
+        else:
+            value_name = card.name.lower()
+    color = card.color.lower()
+
+    card_picure_name = "%s_of_%s.png" % (value_name, color)
+    return os.path.join('cards', card_picure_name)
