@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 
 import src.common.constants as cst
-from src.common.func_pictures import load_image
+from src.common.func_pictures import load_image, convert_card_to_picture
 
 
 class View_game():
@@ -18,18 +18,17 @@ class View_game():
         bgd_tile = load_image("blackjack_table.png")
         bgd_tile = pygame.transform.scale(bgd_tile, (self.menu_config["width"],
                                                      self.menu_config["height"]))
-        background = pygame.Surface((self.menu_config["width"],
+        self.background = pygame.Surface((self.menu_config["width"],
                                      self.menu_config["height"]))
-        background.blit(bgd_tile, (0, 0))
+        self.background.blit(bgd_tile, (0, 0))
 
-        # Test the add of a card on the window
-        card_tile = load_image("cards\\2_of_clubs.png")
-        card_tile = pygame.transform.scale(card_tile, (cst.CONFIG_PICTURES['cards']['size']['width'],
-                                                       cst.CONFIG_PICTURES['cards']['size']['height']))
-        background.blit(card_tile, (50, 50))
+        # Test the display of cards on the window
+        from src.CardsAPI.Card import Card
+        self.add_card(Card('King'), (50, 50))
+        self.add_card(Card('Queen'), (150, 150))
 
         # Display on windows
-        self.window.blit(background, (0, 0))
+        self.window.blit(self.background, (0, 0))
         pygame.display.flip()
 
         # Init sprites
@@ -38,6 +37,15 @@ class View_game():
         # Update the scene
         dirty = all_sprites.draw(self.window)
         pygame.display.update(dirty)
+
+    def add_card(self, card, pos):
+        """
+        Add a card on the table view at a certain pos
+        """
+        card_tile = load_image(convert_card_to_picture(card))
+        card_tile = pygame.transform.scale(card_tile, (cst.CONFIG_PICTURES['cards']['size']['width'],
+                                                       cst.CONFIG_PICTURES['cards']['size']['height']))
+        self.background.blit(card_tile, pos)
 
     def refresh(self):
 
@@ -49,14 +57,14 @@ def main(window, menu_config):
     # Init window
     screen = window
 
-    # Load background image
+    # Load self.background image
     bgd_tile = load_image("blackjack_table.png")
     bgd_tile = pygame.transform.scale(bgd_tile, (menu_config["width"], menu_config["height"]))
-    background = pygame.Surface((menu_config["width"], menu_config["height"]))
-    background.blit(bgd_tile, (0, 0))
+    self.background = pygame.Surface((menu_config["width"], menu_config["height"]))
+    self.background.blit(bgd_tile, (0, 0))
 
     # Display on windows
-    screen.blit(background, (0, 0))
+    screen.blit(self.background, (0, 0))
     pygame.display.flip()
 
     # Init sprites
