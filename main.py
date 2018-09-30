@@ -14,7 +14,7 @@ from pygame.locals import *
 
 import src.common.constants as cst
 from src.views import view_menu, view_game, view_option
-from src.controler.game_manager import Game_manager
+from src.controller.game_controller import Game_controller
 
 # ============================================================================
 # =
@@ -64,7 +64,7 @@ class Main:
         Initialize the game_manager
         """
 
-        self.ctrl = Game_manager(self.window, self.config["window"])
+        self.ctrl = Game_controller(self.window, self.config["window"])
 
     def mainloop(self):
         """

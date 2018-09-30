@@ -3,14 +3,14 @@ import src.common.constants as cst
 from src.views.view_game import View_game
 
 
-class Game_manager:
+class Game_controller:
     """
-    A controler for all the game
+    A controller for all the game
     """
 
     def __init__(self, window, menu_config):
 
-        print("Enter in controler")
+        print("Enter in controller")
         self.window = window
         self.menu_config = menu_config
         # self.view_game = View_game(window, menu_config)
