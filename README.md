@@ -16,6 +16,7 @@ For our first project, we decided to develop a simple card game : Black Jack is 
 
 Our project is a python project, so for now you need to have python installed on your computer to launch it.
 You also need :
+* python >= 3.5 
 * pygame
 * (insert others dependancie)
 * ...
