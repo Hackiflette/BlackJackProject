@@ -32,4 +32,4 @@ def convert_card_to_picture(card):
     color = card.color.lower()
 
     card_picure_name = "%s_of_%s.png" % (value_name, color)
-    return card_picure_name
+    return os.path.join('cards', card_picure_name)
