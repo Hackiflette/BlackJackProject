@@ -22,6 +22,10 @@ class View_game():
                                      self.menu_config["height"]))
         background.blit(bgd_tile, (0, 0))
 
+        # Test the add of a card on the window
+        card_tile = load_image("cards\\2_of_clubs.png")
+        background.blit(card_tile, (50, 50))
+
         # Display on windows
         self.window.blit(background, (0, 0))
         pygame.display.flip()
