@@ -24,8 +24,8 @@ class View_game():
 
         # Test the display of cards on the window
         from src.CardsAPI.Card import Card
-        self.add_card(Card('King'), (50, 50))
-        self.add_card(Card('Queen'), (150, 150))
+        self.add_card(Card('King'), (350, 400))
+        self.add_card(Card('Queen'), (365, 415))
 
         # Display on windows
         self.window.blit(self.background, (0, 0))
