@@ -41,17 +41,11 @@ def test_split_hand():
     assert hand_1 == hand_2
 
     hand2 = Hand.Hand([Card.Card(3), Card.Card(4)])
-    try:
-        h1, h2 = hand2.split()
-        split = True
-    except AssertionError:
-        split = False
-    assert not split
+    h1, h2 = hand2.split()
+    #pas splitable
+    assert h1 == None and h2 == None
 
     hand += Card.Card(3)
-    try:
-        [h1, h2] = hand.split()
-        split = True
-    except AssertionError:
-        split = False
-    assert not split
+    [h1, h2] = hand.split()
+    #testing too much card in hand
+    assert h1 == None and h2 == None

@@ -8,7 +8,7 @@ class Player:
     def __init__(self, name, wallet, uid=None):
         self.uuid: uuid.UUID = self.create_uuid(uid)
         # hands are list of Hand, money bet and if the hand is lock
-        self.hands: List[[Hand, int, False]] = [Hand.Hand(), 0, False]
+        self.hands: List[List[Hand, int, False]] = [[Hand.Hand(), 0, False]]
         self.wallet: int = wallet
         self.name = name
 
@@ -31,12 +31,12 @@ class Player:
             # subtract amount from wallet and add it the the pot
             self.wallet -= amount
             # increasing the amount of money bet for this hand
-            self.hands[index_of_the_hand][PlayerHand.HandBet] += amount
+            self.hands[index_of_the_hand][PlayerHand.HandBet.value] += amount
             return True
         else:
             # amount is higher than wallet put wallet at zero and put it into
             # the money bet on hand
-            self.hands[index_of_the_hand][PlayerHand.HandBet] += self.wallet
+            self.hands[index_of_the_hand][PlayerHand.HandBet.value] += self.wallet
             self.wallet = 0
 
         return False
@@ -50,7 +50,7 @@ class Player:
            - False: split can't be done
         """
         if self.checkDoubleBetIsPossible(index_of_hand_to_split) \
-           and self.hands[index_of_hand_to_split][PlayerHand.Hand].checkSplitIsPossible():
+           and self.hands[index_of_hand_to_split][PlayerHand.Hand.value].checkSplitIsPossible():
            return True
 
         return False
@@ -60,7 +60,7 @@ class Player:
         Check if player can bet again what he has already bet on his hands
         :return: True if double is possible False if not
         """
-        if self.hands[index_of_the_bet_to_double][PlayerHand.HandBet] <= self.wallet:
+        if self.hands[index_of_the_bet_to_double][PlayerHand.HandBet.value] <= self.wallet:
             return True
 
         return False
@@ -72,13 +72,13 @@ class Player:
         if self.checkDoubleBetIsPossible(index_of_the_hand_to_double):
             # ---- Double the bet ----
             # 3 - lock the hand
-            self.hands[index_of_the_hand_to_double][PlayerHand.IsLock] = True
+            self.hands[index_of_the_hand_to_double][PlayerHand.IsLock.value] = True
 
             # 1 - removing the bet in the wallet
-            self.wallet -= self.hands[index_of_the_hand_to_double][PlayerHand.HandBet]
+            self.wallet -= self.hands[index_of_the_hand_to_double][PlayerHand.HandBet.value]
 
             # 2 - adding the new bet value
-            self.hands[index_of_the_hand_to_double][PlayerHand.HandBet] *= 2
+            self.hands[index_of_the_hand_to_double][PlayerHand.HandBet.value] *= 2
         else :
             print("<class Player>[double] double bet on Player", self.uuid, "is impossible")
 
@@ -90,28 +90,28 @@ class Player:
 
         if self.checkSplitIsPossible(index_of_hand_to_split):
             # if check is ok cards are good and wallet have enough money
-            splitted_hand = self.hands[index_of_hand_to_split][PlayerHand.Hand].split()
-            bet_of_the_hand = self.hands[index_of_hand_to_split][PlayerHand.HandBet]
+            splitted_hand = self.hands[index_of_hand_to_split][PlayerHand.Hand.value].split()
+            bet_of_the_hand = self.hands[index_of_hand_to_split][PlayerHand.HandBet.value]
 
             # remove bet of the second hand just created
             self.wallet -= bet_of_the_hand
 
-            if len(splitted_hand) > 2 :
+            if len(splitted_hand) >= 2 :
                 # ---- Creating the new hands ---
                 # 1 - reinitialize hands of the player
                 self.clearHands()
 
                 # 2 - adding first hand with the associated bet
-                self.hands.append(Tuple[splitted_hand[0], bet_of_the_hand])
+                self.hands.append([splitted_hand[0], bet_of_the_hand, False])
 
                 # 3 - adding second hand with it associated bet
-                self.hands.append(Tuple[splitted_hand[1], bet_of_the_hand])
+                self.hands.append([splitted_hand[1], bet_of_the_hand, False])
             else:
                 print("<class Player>[split] split return less than 2 cards for hand of Player ", self.uuid)
 
 
     def addCard(self, card_to_add, index_of_the_hand_to_change):
-        self.hands[index_of_the_hand_to_change][PlayerHand.Hand].card_list += card_to_add
+        self.hands[index_of_the_hand_to_change][PlayerHand.Hand.value] += card_to_add
 
     def clearHands(self):
         self.hands = []

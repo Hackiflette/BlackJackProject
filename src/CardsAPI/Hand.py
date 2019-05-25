@@ -37,6 +37,16 @@ class Hand(object):
         else:
             return False
 
+    def checkSplitIsPossible(self):
+        """
+        Check if the card are the same
+        :return: True is split can be done False otherwise
+        """
+        if len(self.card_list) == 2 and \
+           self.card_list[0].value == self.card_list[1].value:
+           return True
+        return False
+
     def split(self) -> Tuple['Hand', 'Hand']:
         """
         Performs a split action. Returns two instances of Hand.
@@ -45,15 +55,16 @@ class Hand(object):
         :return: The two resulting hands in a tuple
         :raise: AssertionError
         """
-        assert len(self.card_list) == 2
-        assert self.card_list[0].value == self.card_list[1].value
-        return (self.__class__([self.card_list[0]], isSplit=True),
-                self.__class__([self.card_list[1]], isSplit=True))
+        if len(self.card_list) == 2 and \
+           self.card_list[0].value == self.card_list[1].value:
+            return (self.__class__([self.card_list[0]], isSplit=True),
+                    self.__class__([self.card_list[1]], isSplit=True))
+        return [None, None]
 
     """
-    The following are comparison methods for comparing Hand objects. All 
-    standard comparison operators are defined and take into account the fact 
-    that a Hand can be a blackjack or not and that it can belong to the 
+    The following are comparison methods for comparing Hand objects. All
+    standard comparison operators are defined and take into account the fact
+    that a Hand can be a blackjack or not and that it can belong to the
     dealer or not
     """
     def __gt__(self, other: 'Hand') -> bool:

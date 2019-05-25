@@ -32,6 +32,9 @@ def testSplit():
 
     player.bet(250, 0)
 
+    split_possible = player.checkSplitIsPossible(0)
+    assert split_possible == True
+
     player.split(0)
-    assert len(player.hands) > 2
+    assert len(player.hands) == 2
     assert player.wallet == 500
