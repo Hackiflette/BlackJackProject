@@ -6,6 +6,7 @@ from src.common.constants import Decision
 class Dealer:
     def __init__(self):
         self.hand = Hand()
+        self.name = "Hackiflette God"
 
     def chooseAction(self, mode=0):
         """
