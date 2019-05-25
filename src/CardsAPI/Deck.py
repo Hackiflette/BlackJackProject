@@ -5,7 +5,7 @@ from .Card import Card, card_to_value_dict, colors
 
 
 class Deck:
-    def __init__(self, SHUFFLE: bool=True):
+    def __init__(self, SHUFFLE: bool = True):
         self.cards = list(
             itertools.product(card_to_value_dict.keys(), colors)) * 6
 
@@ -19,7 +19,6 @@ class Deck:
         # the deck. Usually placed around 3/4 of the deck
         self.red_card_index = random.randint(
             (3/4) * len(self.cards) - 30, (3 / 4) * len(self.cards) + 30)
-        # TODO: find a cleaner way than -30 +30, like gaussian distribution
 
     def shuffle(self):
         # shuffle deck
@@ -31,6 +30,6 @@ class Deck:
         self.top_card_index += 1
         if self.top_card_index == self.red_card_index:
             self.shuffle()
-            # TODO: we should do it only at the end of a turn
+            # FIXME: we should do it only at the end of a turn
 
         return Card(*self.cards[self.top_card_index])

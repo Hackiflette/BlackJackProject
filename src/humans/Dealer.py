@@ -8,7 +8,7 @@ class Dealer:
         self.hand = Hand()
         self.name = "Hackiflette God"
 
-    def chooseAction(self, mode=0):
+    def chooseAction(self, mode=0) -> Decision:
         """
         Function to choose action, Hit or Stand, depending on the dealer's
         hand value. Usually 2 rules can be chosen regarding the dealer's
@@ -37,5 +37,3 @@ class Dealer:
             raise ValueError("'mode' parameter of class Dealer's "
                              "'chooseAction' method should be 0 or 1")
         return Decision.stand
-
-
