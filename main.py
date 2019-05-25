@@ -6,6 +6,7 @@
 
 import os
 import json
+import time
 
 import pygame
 from pygame.locals import (
@@ -23,7 +24,7 @@ from src.common.constants import (
 )
 from src.views import view_menu, view_game, view_option
 from src.controller.game_controller import Game_controller
-
+from src.humans.Player import Player
 # ============================================================================
 # =
 # = Application
@@ -85,6 +86,7 @@ class Main:
 
         while state != Game.quit:
             if state == Game.menu:
+                self.ctrl.resetallhumans()
                 state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
             elif state == Game.play:
                 self.ctrl.game_launch()
@@ -97,8 +99,7 @@ class Main:
 
         pygame.quit()
 
-    @staticmethod
-    def gameLoop():
+    def gameLoop(self):
         """
         The loop of the game which communicate with controller
         """
@@ -110,7 +111,11 @@ class Main:
                     state = Game.menu
                 elif event.type == KEYDOWN and event.key == K_ESCAPE:
                     state = Game.menu
-
+                elif event.type:
+                    keep_playing = self.ctrl.playoneround()
+                    if keep_playing == False :
+                        #Player want to quit
+                        state = Game.menu
         print("gameLoop")
         return state
 
