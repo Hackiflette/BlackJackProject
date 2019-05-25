@@ -11,6 +11,7 @@ from enum import Enum
 # ============================================================================
 # = Configuration parameters
 # ============================================================================
+from CardsAPI.Hand import Hand
 
 __tmp = "data/config/path.cfg.json"
 with open(__tmp, "r", encoding="utf-8") as f:
@@ -55,13 +56,17 @@ class Decision(Enum):
     double = 2
     split = 3
 
-class PlayerHand(Enum):
+
+class PlayerHand:
     """
     Hand list index for player hand
     """
-    Hand = 0
-    HandBet = 1
-    IsLock = 2
+
+    def __init__(self, hand: Hand = Hand(),
+                 hand_bet: int = 0, is_lock: bool = False):
+        self.hand: Hand = hand
+        self.hand_bet: int = hand_bet
+        self.is_lock: bool = is_lock
 # ============================================================================
 # = Clear temporary variables
 # ============================================================================

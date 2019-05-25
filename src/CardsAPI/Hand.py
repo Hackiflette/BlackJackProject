@@ -1,10 +1,10 @@
-from .Card import Card
+from src.CardsAPI.Card import Card
 from typing import List, Tuple
 
 
 class Hand(object):
-    def __init__(self, card_list: List[Card]=None, is_dealer_hand: bool=False,
-                 isSplit: bool = False):
+    def __init__(self, card_list: List[Card] = None, is_dealer_hand:
+                 bool = False, isSplit: bool = False):
         if card_list is None:
             card_list = []
         self.card_list = card_list
@@ -42,9 +42,9 @@ class Hand(object):
         Check if the card are the same
         :return: True is split can be done False otherwise
         """
-        if len(self.card_list) == 2 and \
-           self.card_list[0].value == self.card_list[1].value:
-           return True
+        if (len(self.card_list) == 2
+                and self.card_list[0].value == self.card_list[1].value):
+            return True
         return False
 
     def split(self) -> Tuple['Hand', 'Hand']:
