@@ -1,7 +1,6 @@
-from CardsAPI.Exceptions import CardsAPIError
-from src.CardsAPI.Hand import Hand
+from src.CardsAPI.Exceptions import CardsAPIError
 import uuid
-from typing import List, Tuple
+from typing import List
 from src.common.constants import PlayerHand
 
 
@@ -50,9 +49,9 @@ class Player:
            - True : split can be done
            - False: split can't be done
         """
-        if self.checkDoubleBetIsPossible(index_of_hand_to_split) \
-           and self.hands[index_of_hand_to_split].hand.checkSplitIsPossible():
-           return True
+        if (self.checkDoubleBetIsPossible(index_of_hand_to_split)
+                and self.hands[index_of_hand_to_split].hand.checkSplitIsPossible()):
+            return True
 
         return False
 
