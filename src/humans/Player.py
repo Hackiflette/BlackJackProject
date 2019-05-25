@@ -8,8 +8,9 @@ class Player:
     def __init__(self, name, wallet, uid=None):
         self.uuid: uuid.UUID = self.create_uuid(uid)
         # hands are list of Hand, money bet and if the hand is lock
-        self.hands: List[Tuple[Hand, int, False]] = list()
+        self.hands: List[[Hand, int, False]] = [Hand.Hand(), 0, False]
         self.wallet: int = wallet
+        self.name = name
 
     @staticmethod
     def create_uuid(uid):
@@ -26,7 +27,7 @@ class Player:
                  - False : amount is too high bet only what left in the wallet
         """
 
-        if amount <= wallet :
+        if amount <= self.wallet :
             # subtract amount from wallet and add it the the pot
             self.wallet -= amount
             # increasing the amount of money bet for this hand
@@ -77,7 +78,7 @@ class Player:
             self.wallet -= self.hands[index_of_the_hand_to_double][PlayerHand.HandBet]
 
             # 2 - adding the new bet value
-            self.hands[index_of_the_hand_to_double][PlayerHand.HandBet] += self.hands[index_of_the_hand_to_double][PlayerHand.HandBet]
+            self.hands[index_of_the_hand_to_double][PlayerHand.HandBet] *= 2
         else :
             print("<class Player>[double] double bet on Player", self.uuid, "is impossible")
 
@@ -98,7 +99,7 @@ class Player:
             if len(splitted_hand) > 2 :
                 # ---- Creating the new hands ---
                 # 1 - reinitialize hands of the player
-                self.hands = []
+                self.clearHands()
 
                 # 2 - adding first hand with the associated bet
                 self.hands.append(Tuple[splitted_hand[0], bet_of_the_hand])
@@ -109,4 +110,8 @@ class Player:
                 print("<class Player>[split] split return less than 2 cards for hand of Player ", self.uuid)
 
 
+    def addCard(self, card_to_add, index_of_the_hand_to_change):
+        self.hands[index_of_the_hand_to_change][PlayerHand.Hand].card_list += card_to_add
 
+    def clearHands(self):
+        self.hands = []

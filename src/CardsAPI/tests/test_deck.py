@@ -18,7 +18,7 @@ def testInitDeck():
 def testDealDeck():
 
     deck = Deck.Deck()
-    card = deck.deal()
+    card = deck.getCard()
     assert type(card) == Card.Card
     assert deck.top_card_index == 1
 
@@ -27,11 +27,11 @@ def testRedCardDeck():
 
     deck = Deck.Deck()
     last_card = deck.cards[-1]
-    deck.deal()
+    deck.getCard()
     assert last_card == deck.cards[-1]
 
     for i in range(int(((3 / 4) * 312) + 35)):
-        deck.deal()
+        deck.getCard()
 
     assert deck.cards[-1] != last_card
 
@@ -55,6 +55,6 @@ def testToMuchDeal():
 
     deck = Deck.Deck()
     for i in range(500):
-        card = deck.deal()
+        card = deck.getCard()
 
     assert len(deck.cards) == 312
