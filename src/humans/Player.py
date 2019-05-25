@@ -49,7 +49,7 @@ class Player:
            - False: split can't be done
         """
         if self.checkDoubleBetIsPossible(index_of_hand_to_split) \
-           and self.hands[index_of_hand_to_split][PlayerHand.Hand].checkSplitIsPossible()
+           and self.hands[index_of_hand_to_split][PlayerHand.Hand].checkSplitIsPossible():
            return True
 
         return False
@@ -87,7 +87,7 @@ class Player:
         Check if the hand can be split if so it split it
         """
 
-        if self.checkSplitIsPossible(index_of_hand_to_split)
+        if self.checkSplitIsPossible(index_of_hand_to_split):
             # if check is ok cards are good and wallet have enough money
             splitted_hand = self.hands[index_of_hand_to_split][PlayerHand.Hand].split()
             bet_of_the_hand = self.hands[index_of_hand_to_split][PlayerHand.HandBet]
