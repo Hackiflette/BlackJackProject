@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # ============================================================================
 # =
 # = Imports
@@ -89,7 +87,8 @@ class Main:
 
         pygame.quit()
 
-    def gameLoop(self):
+    @staticmethod
+    def gameLoop():
         """
         The loop of the game which communicate with controller
         """

@@ -19,5 +19,4 @@ class Game_controller:
         self.view_game = View_game(self.window, self.menu_config)
 
     def refresh(self):
-
         self.view_game.refresh()

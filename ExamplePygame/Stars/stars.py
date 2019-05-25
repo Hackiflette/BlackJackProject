@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 This example is based on an official example.
 It is located on the local directory of pygame:

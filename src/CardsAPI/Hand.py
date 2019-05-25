@@ -15,7 +15,7 @@ class Hand(object):
     def value(self) -> int:
         # without this sort, aces are always counted as 11
         sorted_card_list = sorted(self.card_list, key=lambda x: x.value,
-                                reverse=True)
+                                  reverse=True)
         return sum(sorted_card_list)
 
     @property
@@ -30,7 +30,7 @@ class Hand(object):
     def is_burnt(self) -> bool:
         # without this sort, aces are always counted as 11
         sorted_card_list = sorted(self.card_list, key=lambda x: x.value,
-                                reverse=True)
+                                  reverse=True)
         hand_sum = sum(sorted_card_list)
         if hand_sum > 21:
             return True
@@ -116,8 +116,9 @@ class Hand(object):
         return self
 
     def __repr__(self) -> str:
-        return "Hand(card_list={}, is_dealer_hand={})".format(self.card_list,
-                                                            self.is_dealer_hand)
+        return "Hand(card_list={}, is_dealer_hand={})".format(
+            self.card_list, self.is_dealer_hand
+        )
 
     def __str__(self) -> str:
         if self.is_dealer_hand:

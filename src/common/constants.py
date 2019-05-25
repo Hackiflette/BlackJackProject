@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # ============================================================================
 # = File containing all the constant variables
 # ============================================================================
@@ -50,13 +48,14 @@ class Decision(Enum):
     """
     Class with decisions regarding Hands
     """
-    stand = 0
-    hit = 1
-    double = 2
-    split = 3
+    stand = "STAND"
+    hit = "HIT"
+    double = "DOUBLE"
+    split = "SPLIT"
 
 # ============================================================================
 # = Clear temporary variables
 # ============================================================================
+
 
 del __tmp

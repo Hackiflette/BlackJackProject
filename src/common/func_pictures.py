@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pygame
 from src.common.constants import *
 
@@ -17,6 +15,7 @@ def load_image(file):
         raise SystemExit(error)
     return surface.convert_alpha()
 
+
 def convert_card_to_picture(card):
     """
     Return the picture name of a Card object
@@ -31,5 +30,5 @@ def convert_card_to_picture(card):
             value_name = card.name.lower()
     color = card.color.lower()
 
-    card_picure_name = "%s_of_%s.png" % (value_name, color)
-    return os.path.join('cards', card_picure_name)
+    card_picture_name = "%s_of_%s.png" % (value_name, color)
+    return os.path.join('cards', card_picture_name)
