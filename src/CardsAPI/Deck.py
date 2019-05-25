@@ -26,7 +26,7 @@ class Deck:
         # reset counter
         self.top_card_index = 0
 
-    def deal(self) -> Card:
+    def getCard(self) -> Card:
         self.top_card_index += 1
         if self.top_card_index == self.red_card_index:
             self.shuffle()
