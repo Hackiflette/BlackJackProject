@@ -8,10 +8,11 @@ import os
 import json
 from enum import Enum
 
+from src.CardsAPI.Hand import Hand
+
 # ============================================================================
 # = Configuration parameters
 # ============================================================================
-from CardsAPI.Hand import Hand
 
 __tmp = "data/config/path.cfg.json"
 with open(__tmp, "r", encoding="utf-8") as f:
@@ -70,5 +71,6 @@ class PlayerHand:
 # ============================================================================
 # = Clear temporary variables
 # ============================================================================
+
 
 del __tmp
