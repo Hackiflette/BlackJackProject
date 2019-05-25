@@ -8,9 +8,19 @@ import os
 import json
 
 import pygame
-from pygame.locals import *
+from pygame.locals import (
+    QUIT,
+    KEYDOWN,
+    K_ESCAPE,
+)
 
-import src.common.constants as cst
+from src.common.constants import (
+    Game,
+    DIR_CONFIG,
+    DIR_SRC,
+    DIR_DATA,
+    DIR_PICTURES,
+)
 from src.views import view_menu, view_game, view_option
 from src.controller.game_controller import Game_controller
 
@@ -43,7 +53,7 @@ class Main:
         Load the configuration file
         """
 
-        file_config = os.path.join(cst.DIR_CONFIG, "ui.cfg.json")
+        file_config = os.path.join(DIR_CONFIG, "ui.cfg.json")
         with open(file_config, "r", encoding="utf-8") as f:
             self.config = json.load(f)
 
@@ -54,9 +64,10 @@ class Main:
 
         pygame.init()
         pygame.display.set_caption("Black Jack by Hackiflette")
-        self.window = pygame.display.set_mode(
-            (self.config["window"]["width"],
-             self.config["window"]["height"]))
+        self.window = pygame.display.set_mode((
+            self.config["window"]["width"],
+            self.config["window"]["height"],
+        ))
 
     def initController(self):
         """
@@ -72,15 +83,14 @@ class Main:
 
         state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
 
-        while state != cst.Game.quit:
-
-            if state == cst.Game.menu:
+        while state != Game.quit:
+            if state == Game.menu:
                 state, param = view_menu.main(self.window, self.config["window"], self.config["menu_buttons"])
-            elif state == cst.Game.play:
+            elif state == Game.play:
                 self.ctrl.game_launch()
                 state = self.gameLoop()
                 # state, param = view_game.main(self.window, self.config["window"])
-            elif state == cst.Game.option:
+            elif state == Game.option:
                 state, param = view_option.main(self.window, self.config["window"])
             else:
                 state = 0
@@ -92,15 +102,14 @@ class Main:
         """
         The loop of the game which communicate with controller
         """
-        state = cst.Game.play
+        state = Game.play
         print("GameLoop")
-        while state == cst.Game.play:
-
+        while state == Game.play:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    state = cst.Game.menu
+                    state = Game.menu
                 elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                    state = cst.Game.menu
+                    state = Game.menu
 
         print("gameLoop")
         return state
@@ -108,7 +117,7 @@ class Main:
 
 if __name__ == '__main__':
     print("Exists?")
-    for folder in [cst.DIR_SRC, cst.DIR_DATA, cst.DIR_CONFIG, cst.DIR_PICTURES]:
+    for folder in [DIR_SRC, DIR_DATA, DIR_CONFIG, DIR_PICTURES]:
         print(folder, os.path.exists(folder))
 
     Main()
