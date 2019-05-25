@@ -5,7 +5,7 @@ import src.common.constants as cst
 from src.common.func_pictures import load_image, convert_card_to_picture
 
 
-class View_game():
+class View_game:
 
     def __init__(self, window, menu_config):
 
@@ -19,7 +19,7 @@ class View_game():
         bgd_tile = pygame.transform.scale(bgd_tile, (self.menu_config["width"],
                                                      self.menu_config["height"]))
         self.background = pygame.Surface((self.menu_config["width"],
-                                     self.menu_config["height"]))
+                                          self.menu_config["height"]))
         self.background.blit(bgd_tile, (0, 0))
 
         # Test the display of cards on the window

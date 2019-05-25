@@ -27,7 +27,7 @@ colors = {"HEARTS", "SPADES", "CLUBS", "DIAMONDS"}
 
 
 class Card(object):
-    def __init__(self, value: Union[int, str], color: str="hearts"):
+    def __init__(self, value: Union[int, str], color: str = "hearts"):
         self._value = None
         self._color = None
         self.name = None

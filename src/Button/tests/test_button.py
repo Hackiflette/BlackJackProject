@@ -4,9 +4,10 @@ from src.Button import Button
 def testInitButton():
     try:
         button = Button(text="Test")
-        assert True
     except:
         assert False
+    else:
+        assert True
 
 
 def testButtonPos():

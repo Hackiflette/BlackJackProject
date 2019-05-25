@@ -35,7 +35,7 @@ class Main:
 
         # Init pygame
         self.initPygame()
-        self.initControler()
+        self.initController()
 
         # mainloop
         self.mainloop()
@@ -51,15 +51,16 @@ class Main:
 
     def initPygame(self):
         """
-        Intialize the main screen
+        Initialize the main screen
         """
 
         pygame.init()
         pygame.display.set_caption("Black Jack by Hackiflette")
-        self.window = pygame.display.set_mode((self.config["window"]["width"],
-                                               self.config["window"]["height"]))
+        self.window = pygame.display.set_mode(
+            (self.config["window"]["width"],
+             self.config["window"]["height"]))
 
-    def initControler(self):
+    def initController(self):
         """
         Initialize the game_manager
         """
@@ -99,11 +100,12 @@ class Main:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     state = cst.Game.menu
-                elif (event.type == KEYDOWN and event.key == K_ESCAPE):
+                elif event.type == KEYDOWN and event.key == K_ESCAPE:
                     state = cst.Game.menu
 
-        print("gameloop")
+        print("gameLoop")
         return state
+
 
 if __name__ == '__main__':
     print("Exists?")
