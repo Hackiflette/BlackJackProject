@@ -75,7 +75,7 @@ class PlayerHand:
                 f"is_lock = {self.is_lock})")
 
     def __str__(self):
-        return (f"{['Locked', ''][self.is_lock]} "
+        return (f"{['', 'Locked'][self.is_lock]} "
                 f"{self.hand} with bet: {self.hand_bet}")
 
 # ============================================================================
