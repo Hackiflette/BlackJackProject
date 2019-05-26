@@ -1,6 +1,7 @@
 from src.humans import Player
 from src.CardsAPI import Card
 
+
 def testInitPlayer():
     player = Player.Player("TestPlayer1", 1000)
     assert player.name == "TestPlayer1"
@@ -9,12 +10,13 @@ def testInitPlayer():
 
 def testPlayerBet():
     player = Player.Player("TestPlayer1", 1000)
-    player.addCard(Card.Card(1),0)
+    player.addCard(Card.Card(1), 0)
     player.bet(500, 0)
     assert player.wallet == 500
 
     player.bet(1000, 0)
     assert player.wallet == 0
+
 
 def testSplit():
     ace_heart_card = Card.Card("ace", "heart")
@@ -33,7 +35,7 @@ def testSplit():
     player.bet(250, 0)
 
     split_possible = player.checkSplitIsPossible(0)
-    assert split_possible == True
+    assert split_possible
 
     player.split(0)
     assert len(player.hands) == 2

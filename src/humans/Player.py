@@ -109,7 +109,7 @@ class Player:
                                              bet_of_the_hand, False))
             else:
                 raise CardsAPIError(
-                    f"Split return less than 2 cards for hand of "
+                    f"Split does not return exactly two hands for "
                     f"Player: {self!r}")
 
     def addCard(self, card_to_add, index_of_the_hand_to_change):

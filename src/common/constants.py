@@ -63,11 +63,21 @@ class PlayerHand:
     Hand list index for player hand
     """
 
-    def __init__(self, hand: Hand = Hand(),
+    def __init__(self, hand: Hand = None,
                  hand_bet: int = 0, is_lock: bool = False):
-        self.hand: Hand = hand
+        self.hand: Hand = hand or Hand()
         self.hand_bet: int = hand_bet
         self.is_lock: bool = is_lock
+
+    def __repr__(self):
+        return (f"PlayerHand object(hand = {self.hand}, "
+                f"hand_bet = {self.hand_bet}, "
+                f"is_lock = {self.is_lock})")
+
+    def __str__(self):
+        return (f"{['Locked', ''][self.is_lock]} "
+                f"{self.hand} with bet: {self.hand_bet}")
+
 # ============================================================================
 # = Clear temporary variables
 # ============================================================================
