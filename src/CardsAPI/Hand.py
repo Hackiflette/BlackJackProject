@@ -3,8 +3,8 @@ from typing import List, Tuple
 
 
 class Hand(object):
-    def __init__(self, card_list: List[Card] = None, is_dealer_hand:
-                 bool = False, isSplit: bool = False):
+    def __init__(self, card_list: List[Card] = None,
+                 is_dealer_hand: bool = False, isSplit: bool = False):
         self.card_list = card_list or []
         self.is_split = isSplit
         self.is_dealer_hand = is_dealer_hand
