@@ -8,6 +8,8 @@ import os
 import json
 from enum import Enum
 
+from src.CardsAPI.Hand import Hand
+
 # ============================================================================
 # = Configuration parameters
 # ============================================================================
@@ -58,15 +60,30 @@ class Decision(Enum):
     double = 2
     split = 3
 
-class PlayerHand(Enum):
+
+class PlayerHand:
     """
     Hand list index for player hand
     """
-    Hand = 0
-    HandBet = 1
-    IsLock = 2
+
+    def __init__(self, hand: Hand = None,
+                 hand_bet: int = 0, is_lock: bool = False):
+        self.hand: Hand = hand or Hand()
+        self.hand_bet: int = hand_bet
+        self.is_lock: bool = is_lock
+
+    def __repr__(self):
+        return (f"PlayerHand object(hand = {self.hand}, "
+                f"hand_bet = {self.hand_bet}, "
+                f"is_lock = {self.is_lock})")
+
+    def __str__(self):
+        return (f"{['', 'Locked'][self.is_lock]} "
+                f"{self.hand} with bet: {self.hand_bet}")
+
 # ============================================================================
 # = Clear temporary variables
 # ============================================================================
+
 
 del __tmp
