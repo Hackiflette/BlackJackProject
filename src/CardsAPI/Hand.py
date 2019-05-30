@@ -1,5 +1,7 @@
-from src.CardsAPI.Card import Card
 from typing import List, Tuple
+
+from src.CardsAPI.Card import Card
+from src.CardsAPI.Exceptions import CardsAPIError
 
 
 class Hand(object):
@@ -41,7 +43,8 @@ class Hand(object):
         :return: True is split can be done False otherwise
         """
         if (len(self.card_list) == 2
-                and self.card_list[0].value == self.card_list[1].value):
+                and self.card_list[0].value == self.card_list[1].value
+                and not self.is_dealer_hand):
             return True
         return False
 
@@ -53,11 +56,10 @@ class Hand(object):
         :return: The two resulting hands in a tuple
         :raise: AssertionError
         """
-        if len(self.card_list) == 2 and \
-           self.card_list[0].value == self.card_list[1].value:
-            return (self.__class__([self.card_list[0]], isSplit=True),
-                    self.__class__([self.card_list[1]], isSplit=True))
-        return [None, None]
+        if self.checkSplitIsPossible():
+            return (Hand([self.card_list[0]], isSplit=True),
+                    Hand([self.card_list[1]], isSplit=True))
+        raise CardsAPIError(f"{self!r} cannot be split")
 
     """
     The following are comparison methods for comparing Hand objects. All
@@ -121,17 +123,18 @@ class Hand(object):
         """
         if not isinstance(card, Card):
             return NotImplemented
-        self.card_list.append(card)
-        return self
+        new_card_list = self.card_list + [card]
+        return Hand(card_list=new_card_list,
+                    is_dealer_hand=self.is_dealer_hand,
+                    isSplit=self.is_split)
 
     def __repr__(self) -> str:
-        return "Hand(card_list={}, is_dealer_hand={})".format(
-            self.card_list, self.is_dealer_hand
-        )
+        return (f"Hand(card_list={self.card_list},"
+                f"is_dealer_hand={self.is_dealer_hand})")
 
     def __str__(self) -> str:
         if self.is_dealer_hand:
             owner = "Dealer"
         else:
             owner = "Player"
-        return "{} Hand : {}".format(owner, self.card_list)
+        return f"{owner} Hand : {self.card_list}"
