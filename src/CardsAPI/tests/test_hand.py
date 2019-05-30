@@ -2,6 +2,7 @@ from src.CardsAPI import Card, Hand
 
 # To launch test in console :
 # ... $ python -m pytest tests/
+from src.CardsAPI.Exceptions import CardsAPIError
 
 
 def test_init_hand():
@@ -41,11 +42,18 @@ def test_split_hand():
     assert hand_1 == hand_2
 
     hand2 = Hand.Hand([Card.Card(3), Card.Card(4)])
-    h1, h2 = hand2.split()
-    #pas splitable
-    assert h1 == None and h2 == None
+    try:
+        hand2.split()
+    except CardsAPIError:
+        assert True
+    else:
+        assert False
 
+    # testing too many cards in hand
     hand += Card.Card(3)
-    [h1, h2] = hand.split()
-    #testing too much card in hand
-    assert h1 == None and h2 == None
+    try:
+        hand.split()
+    except CardsAPIError:
+        assert True
+    else:
+        assert False
