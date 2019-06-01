@@ -61,6 +61,14 @@ class Decision(Enum):
     split = 3
 
 
+class Moves(Enum):
+    """
+    Class with moves possibilities
+    """
+    up = -1
+    down = 1
+
+
 class PlayerHand:
     """
     Hand list index for player hand
