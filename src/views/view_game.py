@@ -50,7 +50,7 @@ class View_game:
 
     def init_game_btns(self):
         # Display game buttons area
-        cfg_btns = self.view_config['window']['game_buttons']
+        cfg_btns = self.view_config['game_buttons']
         pygame.draw.rect(self.window, cfg_btns['color'],
                          (cfg_btns['x'], cfg_btns['y'],
                           cfg_btns['width'], cfg_btns['height']))
