@@ -9,14 +9,13 @@ import json
 from enum import Enum
 
 from src.CardsAPI.Hand import Hand
+from src.common.config import ConfigPath
 
 # ============================================================================
 # = Configuration parameters
 # ============================================================================
 
-__tmp = "data/config/path.cfg.json"
-with open(__tmp, "r", encoding="utf-8") as f:
-    CONFIG_PATH = json.load(f)
+ConfigPath.initialize("data/config/path.cfg.json")
 __tmp = "data/config/pictures.cfg.json"
 with open(__tmp, "r", encoding="utf-8") as f:
     CONFIG_PICTURES = json.load(f)
@@ -31,10 +30,10 @@ with open(__tmp, "r", encoding="utf-8") as f:
 # = Directories path
 # ============================================================================
 
-DIR_SRC = os.path.join(*CONFIG_PATH["folders"]["src"])  # Source files
-DIR_DATA = os.path.join(*CONFIG_PATH["folders"]["data"])  # Data files
-DIR_CONFIG = os.path.join(*CONFIG_PATH["folders"]["config"])  # Configuration files
-DIR_PICTURES = os.path.join(*CONFIG_PATH["folders"]["pictures"])  # Pictures
+DIR_SRC = ConfigPath.folder("src")  # Source files
+DIR_DATA = ConfigPath.folder("data")  # Data files
+DIR_CONFIG = ConfigPath.folder("config")  # Configuration files
+DIR_PICTURES = ConfigPath.folder("pictures")  # Pictures
 
 # ============================================================================
 # = Enum
