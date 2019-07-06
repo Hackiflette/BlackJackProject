@@ -2,6 +2,7 @@ import pygame
 import src.common.constants as cst
 from src.common.func_pictures import load_image, convert_card_to_picture
 from src.CardsAPI.Card import Card
+from src.Button import Button
 from collections import defaultdict
 
 
@@ -34,6 +35,10 @@ class View_game:
 
         # Display on windows
         self.window.blit(self.background, (0, 0))
+
+        self.init_game_btns()
+
+        # Display everything
         pygame.display.flip()
 
         # Init sprites
@@ -42,6 +47,21 @@ class View_game:
         # Update the scene
         dirty = all_sprites.draw(self.window)
         pygame.display.update(dirty)
+
+    def init_game_btns(self):
+        # Display game buttons area
+        cfg_btns = self.view_config['window']['game_buttons']
+        pygame.draw.rect(self.window, cfg_btns['color'],
+                         (cfg_btns['x'], cfg_btns['y'],
+                          cfg_btns['width'], cfg_btns['height']))
+
+        self.quit_btn = Button(pos=(1100, 610),
+                          width=80,
+                          height=80,
+                          text='Quit',
+                          background=(180, 180, 180),
+                          command=lambda x: print('a'))
+        self.quit_btn.display(self.window)
 
     def add_card(self, card, area_name):
         card_area_config = self.view_config["card_areas"]

@@ -1,7 +1,14 @@
 {
     "window": {
         "width": 1200,
-        "height": 700
+        "height": 700,
+        "game_buttons": {
+            "x": 0,
+            "y": 600,
+            "width": 1200,
+            "height": 100,
+            "color": [50, 50, 50]
+        }
     },
     "card_areas": {
         "extra_card_offset": {
