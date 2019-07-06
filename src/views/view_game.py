@@ -59,8 +59,7 @@ class View_game:
                           width=80,
                           height=80,
                           text='Quit',
-                          background=(180, 180, 180),
-                          command=lambda x: print('a'))
+                          background=(180, 180, 180))
         self.quit_btn.display(self.window)
 
     def add_card(self, card, area_name):
