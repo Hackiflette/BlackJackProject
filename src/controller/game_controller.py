@@ -80,7 +80,7 @@ class Game_controller:
                         return False
                     elif event.type == KEYDOWN and event.key == K_ESCAPE:
                         return False
-                    elif event.type == pygame.MOUSEBUTTONDOWN:
+                    elif event.type == pygame.MOUSEBUTTONUP:
                         pos = pygame.mouse.get_pos()
                         if self.view_game.quit_btn.isClicked(pos):
                             return False
