@@ -48,8 +48,7 @@ class Tokens:
         values = sorted(cls.data.keys(), reverse=True)
 
         dict_tokens = dict()
-        for i in range(len(values)):
-            v = values[i]
+        for v in values:
             # If too much
             if value >= v:
                 n, value = divmod(value, v)
