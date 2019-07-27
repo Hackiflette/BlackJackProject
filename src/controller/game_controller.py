@@ -186,7 +186,6 @@ class GameController:
                     if self.view_game.quit_btn.isClicked(pos):
                         return False
 
-
         dealer_decision = self.dealer.chooseAction()
         # TODO: use dealer_decision if result is hit
         return True
