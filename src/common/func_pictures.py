@@ -1,5 +1,8 @@
+import os
+
 import pygame
-from src.common.constants import *
+
+from src.common.config import ConfigPath
 
 
 def load_image(file):
@@ -7,7 +10,7 @@ def load_image(file):
     Loads an image, prepares it for play
     """
 
-    file = os.path.join(DIR_PICTURES, file)
+    file = os.path.join(ConfigPath.folder("pictures"), file)
     try:
         surface = pygame.image.load(file)
     except pygame.error:
