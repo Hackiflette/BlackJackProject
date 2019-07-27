@@ -76,41 +76,47 @@ class ViewGame:
             text="Quit",
             background=(180, 180, 180),
         )
+
         self.carte_btn = Button(
             pos=(100, 610),
-            width=80,
+            width=100,
             height=80,
-            text="Carte",
+            text="(1) Carte",
             background=(180, 180, 180),
         )
+
         self.bet_btn = Button(
             pos=(300, 610),
-            width=80,
+            width=100,
             height=80,
-            text="Bet",
+            text="(2) Bet",
             background=(180, 180, 180),
         )
+
         self.pass_btn = Button(
             pos=(500, 610),
-            width=80,
+            width=100,
             height=80,
-            text="Pass",
+            text="(3) End Turn",
             background=(180, 180, 180),
         )
+
         self.split_btn = Button(
             pos=(700, 610),
-            width=80,
+            width=100,
             height=80,
-            text="Split",
+            text="(4) Split",
             background=(180, 180, 180),
         )
+        
         self.double_btn = Button(
             pos=(900, 610),
-            width=80,
+            width=100,
             height=80,
-            text="Double",
+            text="(6) Double",
             background=(180, 180, 180),
         )
+
         self.carte_btn.display(self.window)
         self.bet_btn.display(self.window)
         self.pass_btn.display(self.window)
