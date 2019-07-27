@@ -111,6 +111,11 @@ class Main:
         """
         state = Game.play
         print("GameLoop")
+
+        # First Create Player
+        self.ctrl.initiatePlayers()
+        self.ctrl.firstRound()
+
         while state == Game.play:
             for event in pygame.event.get():
                 if event.type == QUIT:
