@@ -5,6 +5,7 @@
         "config": ["data", "config"],
         "pictures": ["data", "pictures"],
         "cards": ["data", "pictures", "cards"],
+        "tokens": ["data", "pictures", "tokens"],
         "src": ["src"]
     }
 }
