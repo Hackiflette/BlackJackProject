@@ -7,6 +7,7 @@ from src.CardsAPI.Card import Card
 from src.common.func_pictures import load_image
 from src.common.game_view_config import game_view_config
 from src.views.card_area_organizer import CardAreaOrganizer
+from src.tokens import Tokens
 
 
 class ViewGame:
@@ -130,6 +131,13 @@ class ViewGame:
         for area in self.card_area_organizer.player_areas:
             for el in area:
                 self.window.blit(el.surface, el.position.as_tuple)
+
+        # TODO: Tokens should be resized and transparent
+        token = Tokens.getImage(10)
+        token = pygame.transform.scale(
+            token, (game_view_config.tokens.width, game_view_config.tokens.height)
+        )
+        self.window.blit(token, (500, 300))
 
         # Update the scene
         scene = sprite_group.draw(self.window)

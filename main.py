@@ -24,9 +24,13 @@ from src.common.constants import (
     DIR_PICTURES,
 )
 from src.common.game_view_config import game_view_config
+from src.common.config import ConfigPath
 from src.views import view_menu, view_game, view_option
 from src.controller.game_controller import GameController
 from src.humans.Player import Player
+from src.tokens import Tokens
+
+
 # ============================================================================
 # =
 # = Application
@@ -47,6 +51,9 @@ class Main:
         # Init pygame
         self.initPygame()
         self.initController()
+
+        # Needs Pygame initialization
+        Tokens.initialize(ConfigPath.file("tokens"))
 
         # mainloop
         self.mainloop()
