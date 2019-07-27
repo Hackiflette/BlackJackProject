@@ -113,6 +113,7 @@ class Main:
         print("GameLoop")
 
         # First Create Player
+        self.ctrl.initiatePlayers()
         self.ctrl.firstRound()
 
         while state == Game.play:

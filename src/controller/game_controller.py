@@ -103,7 +103,7 @@ class GameController:
 
         # loop only for betting. Betting buttons should be the only one modifiable
         for human in self.humans_list:
-            print(human.name + "is betting.")
+            print(human.name + " is betting.")
             state = True
             while state:
                 event = pygame.event.wait()
@@ -185,3 +185,8 @@ class GameController:
                     pos = pygame.mouse.get_pos()
                     if self.view_game.quit_btn.isClicked(pos):
                         return False
+
+
+        dealer_decision = self.dealer.chooseAction()
+        # TODO: use dealer_decision if result is hit
+        return True
