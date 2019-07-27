@@ -8,6 +8,18 @@ from pygame.locals import (
     QUIT,
     KEYDOWN,
     K_ESCAPE,
+    K_1,
+    K_2,
+    K_3,
+    K_4,
+    K_5,
+    K_6,
+    K_KP1,
+    K_KP2,
+    K_KP3,
+    K_KP4,
+    K_KP5,
+    K_KP6,
 )
 
 
@@ -21,9 +33,9 @@ class GameController:
         self.window = window
         self.humans_list = []
         self.dealer = Dealer()
+        self.deck = Deck()
         self.view_game = None
         self.player_wallet = 500
-        self.deck = Deck()
         # self.view_game = View_game(window, view_config)
 
     def gameLaunch(self):
@@ -118,7 +130,6 @@ class GameController:
         self.dealer.addCard(self.deck.getCard())
         self.dealer.addCard(self.deck.getCard())
 
-
     def playOneRound(self):
         for human in self.humans_list:
             print(human.name + " is playing.")
@@ -141,16 +152,45 @@ class GameController:
                 event = pygame.event.wait()
                 if event.type == QUIT:
                     return False
-                elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                    return False
-                elif event.type == pygame.MOUSEBUTTONUP:
+                elif event.type == KEYDOWN :
+                    if event.key == K_ESCAPE:
+                        return False
+
+                    elif event.key in [K_1, K_KP1] :
+                        print(1)
+                        for i in range(len(human.hands)):
+                            card = self.deck.getCard()
+                            human.addCard(card, i)
+
+                    elif event.key in [K_2, K_KP2] :
+                        print(2)
+                        bet_amount = 5
+                        hand_id = 0
+                        if len(human.hands) >= 2:
+                            print("You have " + len(human.hands) + "hands")
+                            hand_id = input("Hand number for bet : ")
+                        human.bet(int(bet_amount), int(hand_id))
+
+                    elif event.key in [K_3, K_KP3] :
+                        print(3)
+                        state = False
+
+                    elif event.key in [K_4, K_KP4] :
+                        print(4)
+                        hand_id = 0
+                        if len(human.hands)>=2:
+                            print("You have " + len(human.hands) + "hands")
+                            hand_id = input("Hand number for bet : ")
+                        human.split(hand_id)
+
+                    elif event.key in [K_5, K_KP5] :
+                        print(5)
+                        human.double(0)
+
+                    elif event.key in [K_6, K_KP6] :
+                        return False
+
+                elif event.type == pygame.MOUSEBUTTONDOWN:
                     pos = pygame.mouse.get_pos()
                     if self.view_game.quit_btn.isClicked(pos):
                         return False
-                else:
-                    print(human.name + " is betting")
-                    state = False
-
-        dealer_decision = self.dealer.chooseAction()
-        # TODO: use dealer_decision if result is hit
-        return True
