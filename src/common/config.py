@@ -25,7 +25,7 @@ class ConfigPath:
         config = cls.path
         for key in keys:
             config = config[key]
-        return os.path.join(*config)
+        return os.path.abspath(os.path.join(*config))
     
     @classmethod
     def folder(cls, key):
@@ -36,4 +36,19 @@ class ConfigPath:
         :return: folder path
         :rtype: str
         """
+
         return cls.get("folders", key)
+    
+    @classmethod
+    def file(cls, key):
+        """
+        Return tge path to a file given by its name
+        
+        :param str key: file name in path.cfg.json
+        :return: file path
+        :rtype: str
+        """
+
+        folder, *path = cls.path["files"][key]
+        folder = cls.folder(folder)
+        return os.path.join(folder, *path)
