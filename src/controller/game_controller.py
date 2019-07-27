@@ -19,7 +19,7 @@ from pygame.locals import (
     K_KP3,
     K_KP4,
     K_KP5,
-    K_KP6
+    K_KP6,
 )
 
 
@@ -32,7 +32,7 @@ class GameController:
         print("Enter in controller")
         self.window = window
         self.deck = Deck()
-        self.humans_list = [Player("Axelle",100)]
+        self.humans_list = [Player("Axelle", 100)]
         self.view_game = None
         # self.view_game = View_game(window, view_config)
 
@@ -79,7 +79,7 @@ class GameController:
 
     def resetAllHumans(self):
         """Resetting all humans : no more player and new dealer"""
-        self.humans_list = [Player("Axelle",100)]
+        self.humans_list = [Player("Axelle", 100)]
 
     def playOneRound(self):
         for human in self.humans_list:
