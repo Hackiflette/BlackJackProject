@@ -1,5 +1,6 @@
-from src.humans import Player
+from src.humans import Player, Dealer
 from src.CardsAPI import Card
+from src.common.constants import Decision
 
 
 def testInitPlayer():
@@ -40,3 +41,38 @@ def testSplit():
     player.split(0)
     assert len(player.hands) == 2
     assert player.wallet == 500
+
+def testDealerDecision():
+    dealer = Dealer.Dealer()
+
+    ace_heart_card = Card.Card("ace", "heart")
+    ten_heart_card = Card.Card(10, "heart")
+
+    dealer.addCard(ace_heart_card)
+    dealer.addCard(ten_heart_card)
+
+    # dealer hand is at 21 should stand, ace should be 11
+    assert dealer.chooseAction() == Decision.stand
+
+    dealer.clearHand()
+
+    six_heart_card = Card.Card(6, "heart")
+
+    dealer.addCard(ace_heart_card)
+    dealer.addCard(six_heart_card)
+
+    # dealer hand is at 17 in mode 0 should stand, ace should be 1
+    assert dealer.chooseAction() == Decision.stand
+    # dealer hand is at 17 in mode 1 should hit, ace should be 1
+    assert dealer.chooseAction(1) == Decision.hit
+
+    dealer.clearHand()
+
+    four_heart_card = Card.Card(4, "heart")
+    three_heart_card = Card.Card(3, "heart")
+
+    dealer.addCard(four_heart_card)
+    dealer.addCard(three_heart_card)
+
+    # dealer hand is at 7 should hit
+    assert dealer.chooseAction() == Decision.hit

@@ -36,3 +36,9 @@ class Dealer:
             raise ValueError("'mode' parameter of class Dealer's "
                              "'chooseAction' method should be 0 or 1")
         return Decision.stand
+
+    def addCard(self, card_to_add):
+        self.hand += card_to_add
+
+    def clearHand(self):
+        self.hand = Hand()

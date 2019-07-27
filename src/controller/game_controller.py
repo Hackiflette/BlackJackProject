@@ -31,13 +31,29 @@ class GameController:
 
         print("Enter in controller")
         self.window = window
-        self.deck = Deck()
-        self.humans_list = [Player("Axelle", 100)]
+        self.humans_list = []
+        self.dealer = Dealer()
         self.view_game = None
+        self.player_wallet = 500
+        self.deck = Deck()
         # self.view_game = View_game(window, view_config)
 
     def gameLaunch(self):
         self.view_game = ViewGame(self.window)
+
+    def initiatePlayers(self):
+        """
+        ask the player(s) how many they are and their name(s)
+
+        :return: bool initialisation is done and OK
+        """
+        # ask the view to open a new window and ask the number of player
+        number_of_player = 1
+
+        for i in range(number_of_player):
+            #ask the name of the player and create the Player
+            name_of_player = "Jesus"
+            self.addHuman(Player(name_of_player, self.player_wallet))
 
     def refresh(self):
         self.view_game.refresh()
@@ -50,10 +66,7 @@ class GameController:
         :type arg1: Player
         """
         if isinstance(human, Player):
-            if len(self.humans_list) > 1: 
-                self.humans_list = self.humans_list[:-1] + [human] + self.humans_list[:-1]
-            else:
-                self.humans_list = [human] + self.humans_list
+            self.humans_list.append(human)
             return True
         else:
             # Given human isn't a player
@@ -79,7 +92,44 @@ class GameController:
 
     def resetAllHumans(self):
         """Resetting all humans : no more player and new dealer"""
-        self.humans_list = [Player("Axelle", 100)]
+        self.humans_list = []
+        self.dealer = Dealer()
+
+    def firstRound(self):
+        """
+        First round allow the players to bet them deal the card for everybody
+        :return: bool : state of the round
+        """
+
+        # loop only for betting. Betting buttons should be the only one modifiable
+        for human in self.humans_list:
+            print(human.name + "is betting.")
+            state = True
+            while state:
+                event = pygame.event.wait()
+                if event.type == QUIT:
+                    return False
+                elif event.type == KEYDOWN and event.key == K_ESCAPE:
+                    return False
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    pos = pygame.mouse.get_pos()
+                    if self.view_game.quit_btn.isClicked(pos):
+                        return False
+                else:
+                    print(human.name + " is betting")
+                    state = False
+
+        #loop to deal hands to everybody
+        for human in self.humans_list:
+            print(human.name + "is receiving cards.")
+            # at initialization we only change the first hand of the player with 2 cards
+            human.addCard(self.deck.getCard(), 0)
+            human.addCard(self.deck.getCard(), 0)
+
+        #giving the dealer a hand (with 2 card)
+        self.dealer.addCard(self.deck.getCard())
+        self.dealer.addCard(self.deck.getCard())
+
 
     def playOneRound(self):
         for human in self.humans_list:
