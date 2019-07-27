@@ -3,7 +3,6 @@ from src.humans.Dealer import Dealer
 from src.humans.Player import Player
 from src.CardsAPI.Deck import Deck
 
-import time
 import pygame
 from pygame.locals import (
     QUIT,

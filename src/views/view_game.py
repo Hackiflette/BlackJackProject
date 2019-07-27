@@ -73,7 +73,7 @@ class ViewGame:
             pos=(1100, 610),
             width=80,
             height=80,
-            text="Quit",
+            text="(6) Quit",
             background=(180, 180, 180),
         )
 
@@ -108,12 +108,12 @@ class ViewGame:
             text="(4) Split",
             background=(180, 180, 180),
         )
-        
+
         self.double_btn = Button(
             pos=(900, 610),
             width=100,
             height=80,
-            text="(6) Double",
+            text="(5) Double",
             background=(180, 180, 180),
         )
 
