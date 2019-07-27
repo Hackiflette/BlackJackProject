@@ -68,14 +68,53 @@ class ViewGame:
             cfg_btns.color,
             (cfg_btns.x, cfg_btns.y, cfg_btns.width, cfg_btns.height),
         )
-
         self.quit_btn = Button(
             pos=(1100, 610),
             width=80,
             height=80,
-            text="Quit",
+            text="(6) Quit",
             background=(180, 180, 180),
         )
+        self.carte_btn = Button(
+            pos=(100, 610),
+            width=100,
+            height=80,
+            text="(1) Carte",
+            background=(180, 180, 180),
+        )
+        self.bet_btn = Button(
+            pos=(300, 610),
+            width=100,
+            height=80,
+            text="(2) Bet",
+            background=(180, 180, 180),
+        )
+        self.pass_btn = Button(
+            pos=(500, 610),
+            width=100,
+            height=80,
+            text="(3) End Turn",
+            background=(180, 180, 180),
+        )
+        self.split_btn = Button(
+            pos=(700, 610),
+            width=100,
+            height=80,
+            text="(4) Split",
+            background=(180, 180, 180),
+        )
+        self.double_btn = Button(
+            pos=(900, 610),
+            width=100,
+            height=80,
+            text="(5) Double",
+            background=(180, 180, 180),
+        )
+        self.carte_btn.display(self.window)
+        self.bet_btn.display(self.window)
+        self.pass_btn.display(self.window)
+        self.split_btn.display(self.window)
+        self.double_btn.display(self.window)
         self.quit_btn.display(self.window)
 
     def refresh(self):

@@ -1,12 +1,25 @@
 from src.views.view_game import ViewGame
 from src.humans.Dealer import Dealer
 from src.humans.Player import Player
+from src.CardsAPI.Deck import Deck
 
 import pygame
 from pygame.locals import (
     QUIT,
     KEYDOWN,
     K_ESCAPE,
+    K_1,
+    K_2,
+    K_3,
+    K_4,
+    K_5,
+    K_6,
+    K_KP1,
+    K_KP2,
+    K_KP3,
+    K_KP4,
+    K_KP5,
+    K_KP6,
 )
 
 
@@ -18,7 +31,8 @@ class GameController:
 
         print("Enter in controller")
         self.window = window
-        self.humans_list = [Dealer()]
+        self.deck = Deck()
+        self.humans_list = [Player("Axelle", 100)]
         self.view_game = None
         # self.view_game = View_game(window, view_config)
 
@@ -65,7 +79,7 @@ class GameController:
 
     def resetAllHumans(self):
         """Resetting all humans : no more player and new dealer"""
-        self.humans_list = [Dealer()]
+        self.humans_list = [Player("Axelle", 100)]
 
     def playOneRound(self):
         for human in self.humans_list:
@@ -75,18 +89,49 @@ class GameController:
             # Let human choose
             state = True
             while state:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
+                event = pygame.event.wait()
+                if event.type == QUIT:
+                    return False
+
+                elif event.type == KEYDOWN :
+                    if event.key == K_ESCAPE:
                         return False
-                    elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                        return False
-                    elif event.type == pygame.MOUSEBUTTONUP:
-                        pos = pygame.mouse.get_pos()
-                        if self.view_game.quit_btn.isClicked(pos):
-                            return False
-                    else:
-                        human.chooseAction()
+
+                    elif event.key in [K_1, K_KP1] :
+                        print(1)
+                        for i in range(len(human.hands)):
+                            card = self.deck.getCard()
+                            human.addCard(card, i)
+
+                    elif event.key in [K_2, K_KP2] :
+                        print(2)
+                        bet_amount = 5
+                        hand_id = 0
+                        if len(human.hands) >= 2:
+                            print("You have " + len(human.hands) + "hands")
+                            hand_id = input("Hand number for bet : ")
+                        human.bet(int(bet_amount), int(hand_id))
+
+                    elif event.key in [K_3, K_KP3] :
+                        print(3)
                         state = False
-                        return
 
+                    elif event.key in [K_4, K_KP4] :
+                        print(4)
+                        hand_id = 0
+                        if len(human.hands)>=2:
+                            print("You have " + len(human.hands) + "hands")
+                            hand_id = input("Hand number for bet : ")
+                        human.split(hand_id)
 
+                    elif event.key in [K_5, K_KP5] :
+                        print(5)
+                        human.double(0)
+
+                    elif event.key in [K_6, K_KP6] :
+                        return False
+
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    pos = pygame.mouse.get_pos()
+                    if self.view_game.quit_btn.isClicked(pos):
+                        return False
