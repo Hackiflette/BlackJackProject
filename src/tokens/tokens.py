@@ -50,7 +50,7 @@ class Tokens:
         dict_tokens = dict()
         for i in range(len(values)):
             v = values[i]
-            # If too much
+            # If enough
             if value >= v:
                 n, value = divmod(value, v)
                 dict_tokens[v] = n
