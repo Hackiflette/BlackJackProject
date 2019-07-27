@@ -1,22 +1,7 @@
 {
-    "white": {
-        "image": "token_white.jpg",
-        "value": 1
-    },
-    "red": {
-        "image": "token_red.jpg",
-        "value": 5
-    },
-    "blue": {
-        "image": "token_blue.jpg",
-        "value": 10
-    },
-    "green": {
-        "image": "token_green.jpg",
-        "value": 25
-    },
-    "black": {
-        "image": "token_black.jpg",
-        "value": 100
-    }
+    "1": "token_white.jpg",
+    "5": "token_red.jpg",
+    "10": "token_blue.jpg",
+    "25": "token_green.jpg",
+    "100": "token_black.jpg"
 }
