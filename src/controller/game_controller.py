@@ -97,38 +97,38 @@ class GameController:
                     if event.key == K_ESCAPE:
                         return False
 
-                    elif event.key == K_1 or event.key == K_KP1 :
+                    elif event.key in [K_1, K_KP1] :
                         print(1)
                         for i in range(len(human.hands)):
                             card = self.deck.getCard()
                             human.addCard(card, i)
 
-                    elif event.key == K_2 or event.key == K_KP2 :
+                    elif event.key in [K_2, K_KP2] :
                         print(2)
-                        betAmount = 5
-                        handId = 0
+                        bet_amount = 5
+                        hand_id = 0
                         if len(human.hands) >= 2:
                             print("You have " + len(human.hands) + "hands")
-                            handId = input("Hand number for bet : ")
-                        human.bet(int(betAmount), int(handId))
+                            hand_id = input("Hand number for bet : ")
+                        human.bet(int(bet_amount), int(hand_id))
 
-                    elif event.key == K_3 or event.key == K_KP3 :
+                    elif event.key in [K_3, K_KP3] :
                         print(3)
                         state = False
 
-                    elif event.key == K_4 or event.key == K_KP4 :
+                    elif event.key in [K_4, K_KP4] :
                         print(4)
-                        handId = 0
+                        hand_id = 0
                         if len(human.hands)>=2:
                             print("You have " + len(human.hands) + "hands")
-                            handId = input("Hand number for bet : ")
-                        human.split(handId)
+                            hand_id = input("Hand number for bet : ")
+                        human.split(hand_id)
 
-                    elif event.key == K_5 or event.key == K_KP5 :
+                    elif event.key in [K_5, K_KP5] :
                         print(5)
                         human.double(0)
 
-                    elif event.key == K_6 or event.key == K_KP6 :
+                    elif event.key in [K_6, K_KP6] :
                         return False
 
                 elif event.type == pygame.MOUSEBUTTONDOWN:
