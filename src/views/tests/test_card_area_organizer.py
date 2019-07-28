@@ -1,4 +1,4 @@
-from src.CardsAPI.Card import Card
+from src.CardsAPI.card import Card
 from src.common.game_view_config import game_view_config
 from src.views.card_area_organizer import CardAreaOrganizer
 

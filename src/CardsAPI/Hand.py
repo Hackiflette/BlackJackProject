@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from src.CardsAPI.Card import Card
+from src.CardsAPI.card import Card
 from src.CardsAPI.Exceptions import CardsAPIError
 
 

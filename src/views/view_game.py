@@ -3,7 +3,7 @@ from collections import defaultdict
 import pygame
 
 from src.Button import Button
-from src.CardsAPI.Card import Card
+from src.CardsAPI.card import Card
 from src.common.func_pictures import load_image
 from src.common.game_view_config import game_view_config
 from src.views.card_area_organizer import CardAreaOrganizer

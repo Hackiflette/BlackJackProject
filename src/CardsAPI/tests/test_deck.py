@@ -1,4 +1,4 @@
-from src.CardsAPI import Deck, Card
+from src.CardsAPI import Deck, card
 
 
 def test_init_deck():
@@ -20,7 +20,7 @@ def test_deal_deck():
 
     deck = Deck.Deck()
     card = deck.getCard()
-    assert type(card) == Card.Card
+    assert type(card) == card.Card
     assert deck.top_card_index == 1
 
 

@@ -3,7 +3,7 @@ from typing import List
 
 import pygame
 
-from src.CardsAPI.Card import Card
+from src.CardsAPI.card import Card
 from src.common.func_pictures import load_image, convert_card_to_picture
 from src.common.game_view_config import game_view_config, Coordinates
 from src.common.utils import Signal, SurfaceWithPosition
