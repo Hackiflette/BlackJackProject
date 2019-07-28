@@ -8,7 +8,7 @@ import os
 import json
 from enum import Enum
 
-from src.CardsAPI.Hand import Hand
+from src.CardsAPI.hand import Hand
 from src.common.config import ConfigPath
 
 # ============================================================================

@@ -1,4 +1,4 @@
-from src.CardsAPI.Hand import Hand
+from src.CardsAPI.hand import Hand
 from src.common.constants import Decision
 
 
