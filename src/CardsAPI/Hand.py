@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 from src.CardsAPI.card import Card
-from src.CardsAPI.Exceptions import CardsAPIError
+from src.CardsAPI.exceptions import CardsAPIError
 
 
 class Hand:
