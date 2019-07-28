@@ -1,7 +1,7 @@
 from src.views.view_game import ViewGame
 from src.humans.Dealer import Dealer
 from src.humans.Player import Player
-from src.CardsAPI.Deck import Deck
+from src.CardsAPI.deck import Deck
 
 import pygame
 from pygame.locals import (
