@@ -1,4 +1,4 @@
-from src.CardsAPI.Exceptions import CardsAPIError
+from src.cards.exceptions import CardsAPIError
 import uuid
 from typing import List
 from src.common.constants import PlayerHand

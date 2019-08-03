@@ -1,16 +1,17 @@
-from src.CardsAPI import Deck, Card
+from src.cards.deck import Deck
+from src.cards.card import Card
 
 
 def test_init_deck():
 
-    deck = Deck.Deck()
+    deck = Deck()
     assert deck.top_card_index == 0
     assert len(deck.cards) == 312
     # Check placement of the red Card
     assert ((3 / 4) * 312) - 30 <= deck.red_card_index <= ((3 / 4) * 312) + 30
 
     # Assert not shuffle
-    deck = Deck.Deck(False)
+    deck = Deck(False)
     assert deck.top_card_index == 0
     assert len(deck.cards) == 312
     assert ((3 / 4) * 312) - 30 <= deck.red_card_index <= ((3 / 4) * 312) + 30
@@ -18,15 +19,15 @@ def test_init_deck():
 
 def test_deal_deck():
 
-    deck = Deck.Deck()
+    deck = Deck()
     card = deck.getCard()
-    assert type(card) == Card.Card
+    assert type(card) == Card
     assert deck.top_card_index == 1
 
 
 def test_shuffle_deck():
 
-    deck = Deck.Deck()
+    deck = Deck()
     try:
         for i in range(500):
             card = deck.getCard()
@@ -36,7 +37,7 @@ def test_shuffle_deck():
         # This shouldn't work because the Deck is only 312 cards long
         assert False
 
-    deck = Deck.Deck()
+    deck = Deck()
 
     for i in range(deck.red_card_index):
         assert not deck.needs_shuffling
@@ -60,6 +61,6 @@ def test_shuffle_deck():
 
 def test_init_shuffle_deck():
 
-    deck1 = Deck.Deck(False)
-    deck2 = Deck.Deck(False)
+    deck1 = Deck(False)
+    deck2 = Deck(False)
     assert deck1.cards[0] == deck2.cards[0]

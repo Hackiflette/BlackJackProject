@@ -1,5 +1,5 @@
 from src.humans import Player, Dealer
-from src.CardsAPI import Card
+from src.cards import card
 from src.common.constants import Decision
 
 
@@ -11,7 +11,7 @@ def testInitPlayer():
 
 def testPlayerBet():
     player = Player.Player("TestPlayer1", 1000)
-    player.addCard(Card.Card(1), 0)
+    player.addCard(card.Card(1), 0)
     player.bet(500, 0)
     assert player.wallet == 500
 
@@ -20,8 +20,8 @@ def testPlayerBet():
 
 
 def testSplit():
-    ace_heart_card = Card.Card("ace", "heart")
-    ace_spade_card = Card.Card("ace", "spades")
+    ace_heart_card = card.Card("ace", "heart")
+    ace_spade_card = card.Card("ace", "spades")
 
     assert ace_heart_card.value == 1
     assert ace_heart_card.color.lower() == "hearts"
@@ -45,8 +45,8 @@ def testSplit():
 def testDealerDecision():
     dealer = Dealer.Dealer()
 
-    ace_heart_card = Card.Card("ace", "heart")
-    ten_heart_card = Card.Card(10, "heart")
+    ace_heart_card = card.Card("ace", "heart")
+    ten_heart_card = card.Card(10, "heart")
 
     dealer.addCard(ace_heart_card)
     dealer.addCard(ten_heart_card)
@@ -56,7 +56,7 @@ def testDealerDecision():
 
     dealer.clearHand()
 
-    six_heart_card = Card.Card(6, "heart")
+    six_heart_card = card.Card(6, "heart")
 
     dealer.addCard(ace_heart_card)
     dealer.addCard(six_heart_card)
@@ -68,8 +68,8 @@ def testDealerDecision():
 
     dealer.clearHand()
 
-    four_heart_card = Card.Card(4, "heart")
-    three_heart_card = Card.Card(3, "heart")
+    four_heart_card = card.Card(4, "heart")
+    three_heart_card = card.Card(3, "heart")
 
     dealer.addCard(four_heart_card)
     dealer.addCard(three_heart_card)
