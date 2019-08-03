@@ -1,7 +1,7 @@
 import itertools
 import random
 
-from src.CardsAPI.card import Card, card_to_value_dict, colors
+from src.cards.card import Card, card_to_value_dict, colors
 
 
 class Deck:

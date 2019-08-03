@@ -1,8 +1,8 @@
-from src.CardsAPI import card, hand
+from src.cards import card, hand
 
 # To launch test in console :
 # ... $ python -m pytest tests/
-from src.CardsAPI.exceptions import CardsAPIError
+from src.cards.exceptions import CardsAPIError
 
 
 def test_init_hand():

@@ -1,5 +1,5 @@
 from src.humans import Player, Dealer
-from src.CardsAPI import card
+from src.cards import card
 from src.common.constants import Decision
 
 

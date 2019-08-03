@@ -1,4 +1,4 @@
-from src.CardsAPI import card
+from src.cards import card
 
 # To launch test in console :
 # ... $ python -m pytest tests/

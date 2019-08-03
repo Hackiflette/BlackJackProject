@@ -1,4 +1,4 @@
-from src.CardsAPI import deck, card
+from src.cards import deck, card
 
 
 def test_init_deck():
