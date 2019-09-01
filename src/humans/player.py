@@ -1,10 +1,11 @@
 from src.cards.exceptions import CardsAPIError
 import uuid
 from typing import List
-from src.common.constants import PlayerHand
+from src.common.constants import PlayerHand, CURRENCY
 
 
 class Player:
+
     def __init__(self, name, wallet, uid=None):
         self.uuid: uuid.UUID = self.create_uuid(uid)
         # hands are list of Hand, money bet and if the hand is lock
@@ -27,11 +28,13 @@ class Player:
                  - False : amount is too high bet only what left in the wallet
         """
 
-        if amount <= self.wallet :
+        if amount <= self.wallet:
             # subtract amount from wallet and add it the the pot
             self.wallet -= amount
             # increasing the amount of money bet for this hand
             self.hands[index_of_the_hand].hand_bet += amount
+            print(self.name + " bets " + str(amount) +
+                  " " + CURRENCY + " : Success")
             return True
         else:
             # amount is higher than wallet put wallet at zero and put it into
@@ -39,6 +42,8 @@ class Player:
             self.hands[index_of_the_hand].hand_bet += self.wallet
             self.wallet = 0
 
+        print(self.name + " bets " + str(amount) +
+              " " + CURRENCY + " : Failure")
         return False
 
     def checkSplitIsPossible(self, index_of_hand_to_split) -> bool:
@@ -79,8 +84,12 @@ class Player:
 
             # 2 - adding the new bet value
             self.hands[index_of_the_hand_to_double].hand_bet *= 2
-        else :
-            print("<class Player>[double] double bet on Player", self.uuid, "is impossible")
+            print("%s doubles his bet. His bet is now from %i %s" % (
+                self.name, self.hands[index_of_the_hand_to_double].hand_bet, CURRENCY))
+
+        else:
+            print("<class Player>[double] double bet on Player",
+                  self.uuid, "is impossible")
 
     def split(self, index_of_hand_to_split):
         """
@@ -107,13 +116,20 @@ class Player:
                 # 3 - adding second hand with it associated bet
                 self.hands.append(PlayerHand(splitted_hand[1],
                                              bet_of_the_hand, False))
+
+                print(self.name + " splits his hand " +
+                      str(index_of_hand_to_split) + " : Success")
             else:
+                print(self.name + " splits his hand " +
+                      str(index_of_hand_to_split) + " : Failure")
                 raise CardsAPIError(
                     f"Split does not return exactly two hands for "
                     f"Player: {self!r}")
 
     def addCard(self, card_to_add, index_of_the_hand_to_change):
         self.hands[index_of_the_hand_to_change].hand += card_to_add
+        print(self.name + " gets a new card on his hand " +
+              str(index_of_the_hand_to_change))
 
     def clearHands(self):
         self.hands = []
