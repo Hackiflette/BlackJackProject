@@ -1,6 +1,6 @@
 from src.views.view_game import ViewGame
-from src.humans.Dealer import Dealer
-from src.humans.Player import Player
+from src.humans.dealer import Dealer
+from src.humans.player import Player
 from src.cards.deck import Deck
 
 import pygame
