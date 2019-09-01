@@ -27,7 +27,7 @@ from src.common.game_view_config import game_view_config
 from src.common.config import ConfigPath
 from src.views import view_menu, view_game, view_option
 from src.controller.game_controller import GameController
-from src.humans.Player import Player
+from src.humans.player import Player
 from src.tokens import Tokens
 
 
