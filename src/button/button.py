@@ -2,7 +2,7 @@ import pygame
 
 # ============================================================================
 # =
-# = button
+# = Button
 # =
 # ============================================================================
 
@@ -23,7 +23,7 @@ class Button:
     :type command: function
     :param state: ["disabled", "enabled"]
     :type state: str
-    :param background: background of the button
+    :param background: background of the Button
     :type background: 3-tuple
     :param color: text color
     :type color: 3-tuple
@@ -38,7 +38,7 @@ class Button:
         self.__validKwargs = {"pos", "width", "height", "text", "color", "background",
                               "command", "value", "state", "border", "border_color"}
         self.rect = pygame.Rect(0, 0, 0, 0)
-        self.text = "button"
+        self.text = "Button"
         self.color = (0, 0, 0)
         self.background = None
         self.command = self.__emptyFunc
@@ -64,7 +64,7 @@ class Button:
         :type command: function
         :param state: ["disabled", "enabled"]
         :type state: str
-        :param background: background of the button
+        :param background: background of the Button
         :type background: 3-tuple
         """
 
@@ -80,7 +80,7 @@ class Button:
 
     def isClicked(self, pos):
         """
-        Return True is the pos is in the button
+        Return True is the pos is in the Button
         """
 
         return self.rect.collidepoint(pos)
@@ -171,10 +171,10 @@ class Button:
 
     def __str__(self):
         """
-        To print the caracteristics of the button
+        To print the caracteristics of the Button
         """
 
-        txt = "button:\n"
+        txt = "Button:\n"
         txt += "- pos (%d, %d)\n" % (self.rect.x, self.rect.y)
         txt += "- width %d\n" % self.rect.width
         txt += "- height %d\n" % self.rect.height
