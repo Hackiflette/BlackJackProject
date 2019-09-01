@@ -1,16 +1,17 @@
-from src.humans import player, dealer
+from src.humans.player import  Player
+from src.humans.dealer import Dealer
 from src.cards import card
 from src.common.constants import Decision
 
 
 def testInitPlayer():
-    player = player.Player("TestPlayer1", 1000)
+    player = Player("TestPlayer1", 1000)
     assert player.name == "TestPlayer1"
     assert player.wallet == 1000
 
 
 def testPlayerBet():
-    player = player.Player("TestPlayer1", 1000)
+    player = Player("TestPlayer1", 1000)
     player.addCard(card.Card(1), 0)
     player.bet(500, 0)
     assert player.wallet == 500
@@ -29,7 +30,7 @@ def testSplit():
     assert ace_spade_card.value == 1
     assert ace_spade_card.color.lower() == "spades"
 
-    player = player.Player("TestPlayer1", 1000)
+    player = Player("TestPlayer1", 1000)
     player.addCard(ace_heart_card, 0)
     player.addCard(ace_spade_card, 0)
 
@@ -43,7 +44,7 @@ def testSplit():
     assert player.wallet == 500
 
 def testDealerDecision():
-    dealer = dealer.Dealer()
+    dealer = Dealer()
 
     ace_heart_card = card.Card("ace", "heart")
     ten_heart_card = card.Card(10, "heart")
