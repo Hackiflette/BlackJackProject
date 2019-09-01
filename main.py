@@ -5,8 +5,6 @@
 # ============================================================================
 
 import os
-import json
-import time
 
 import pygame
 from pygame.locals import (
@@ -25,9 +23,8 @@ from src.common.constants import (
 )
 from src.common.game_view_config import game_view_config
 from src.common.config import ConfigPath
-from src.views import view_menu, view_game, view_option
+from src.views import view_menu, view_option
 from src.controller.game_controller import GameController
-from src.humans.player import Player
 from src.tokens import Tokens
 
 
