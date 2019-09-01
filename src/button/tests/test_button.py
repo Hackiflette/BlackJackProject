@@ -1,4 +1,4 @@
-from src.Button import Button
+from src.button import Button
 
 
 def testInitButton():

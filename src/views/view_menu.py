@@ -7,7 +7,7 @@ from typing import List
 from src.common.constants import Game, Moves
 from src.common.func_pictures import load_image
 
-from src.Button import Button
+from src.button import Button
 
 
 def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
