@@ -9,17 +9,17 @@ This game is a famous card game, **Black Jack**. It will have the possibility to
 
 # The Hackiflette team
 
-We are 8 friends  who liked programming, and playing. So we created Hackiflette to develop games and improve our programing skills.
+We are 8 friends who liked programming, and playing. So we created Hackiflette to develop games and improve our programing skills.
 For our first project, we decided to develop a simple card game : Black Jack is our final choice.
 
 # How to play !?
 
-Our project is a python project, so for now you need to have python installed on your computer to launch it.
-You also need :
-* python >= 3.5 
-* pygame
-* (insert others dependancie)
+Our project is a python project, so for now you need to have python (version >= 3.5) installed on your computer to launch it.
+You also need the following packages:
+* pygame = 1.9.4
+* marshmallow = 2.19.5
+* typing = 3.6.6
+* dataclasses = 0.6
 * ...
 
 After download the project, you just have to launch the main.py in the src directory.
-You can also find a game example using pygame, created by @deplanty, by launching the main.py in the ExamplePygame/Stars directory.
