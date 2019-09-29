@@ -209,4 +209,17 @@ class GameController:
 
         print("Dealer decision : " + str(dealer_decision))
 
+        # Win of loose ?
+        if self.dealer.hand.is_burnt:
+            print("Everyone win !")
+        else:
+            for human in self.humans_list:
+                for hand in human.hands:
+                    if hand.hand.is_burnt:
+                        print("Player %s loose with hand %s." % (human, str(hand)))
+                    elif hand.hand > self.dealer.hand:
+                        print("Player %s win with hand %s." % (human, str(hand)))
+                    elif hand.hand == self.dealer.hand:
+                        print("Player %s with hand %s is even with the dealer." % (human, str(hand)))
+
         return True
