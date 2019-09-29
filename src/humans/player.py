@@ -116,7 +116,7 @@ class Player:
         self.hands[index_of_the_hand_to_change].hand += card_to_add
 
     def clearHands(self):
-        self.hands = []
+        self.hands = [PlayerHand()]
 
     def __repr__(self):
         return f"Player(name = {self.name}, uuid = {self.uuid},\n" \

@@ -101,6 +101,10 @@ class GameController:
         :return: bool : state of the round
         """
 
+        for human in self.humans_list:
+            human.clearHands()
+        self.dealer.clearHand()
+
         # loop only for betting. Betting buttons should be the only one modifiable
         for human in self.humans_list:
             print(human.name + " is betting.")
@@ -133,7 +137,9 @@ class GameController:
 
     def playOneRound(self):
         for human in self.humans_list:
+            print(str(human) + " round")
             for hand_idx in range(len(human.hands)):
+                print("Hand %i" % hand_idx)
                 print(human.name + " is playing.")
                 # Get list of possible actions
                 # Manage interfaces
@@ -154,6 +160,7 @@ class GameController:
                             human.addCard(card, hand_idx)
                             print("You : " + str(human.hands[hand_idx].hand))
                             if human.hands[hand_idx].hand.is_burnt or human.hands[hand_idx].hand.is_black_jack:
+                                print("Is burnt or black jack")
                                 state = False
 
                         elif event.key in [K_2, K_KP2] :

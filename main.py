@@ -118,7 +118,6 @@ class Main:
 
         # First Create Player
         self.ctrl.initiatePlayers()
-        self.ctrl.firstRound()
 
         while state == Game.play:
             for event in pygame.event.get():
@@ -127,6 +126,7 @@ class Main:
                 elif event.type == KEYDOWN and event.key == K_ESCAPE:
                     state = Game.menu
                 elif event.type:
+                    self.ctrl.firstRound()
                     keep_playing = self.ctrl.playOneRound()
                     if keep_playing == False :
                         #Player want to quit
