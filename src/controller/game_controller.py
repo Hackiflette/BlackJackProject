@@ -29,7 +29,6 @@ class GameController:
     A controller for all the game
     """
     def __init__(self, window):
-
         print("Enter in controller")
         self.window = window
         self.humans_list = []
@@ -39,10 +38,10 @@ class GameController:
         self.deck = Deck()
         # self.view_game = View_game(window, view_config)
 
-    def gameLaunch(self):
+    def game_launch(self):
         self.view_game = ViewGame(self.window)
 
-    def initiatePlayers(self):
+    def initiate_players(self):
         """
         ask the player(s) how many they are and their name(s)
 
@@ -52,14 +51,14 @@ class GameController:
         number_of_player = 1
 
         for i in range(number_of_player):
-            #ask the name of the player and create the Player
+            # ask the name of the player and create the Player
             name_of_player = "Jesus"
-            self.addHuman(Player(name_of_player, self.player_wallet))
+            self.add_human(Player(name_of_player, self.player_wallet))
 
     def refresh(self):
         self.view_game.refresh()
 
-    def addHuman(self, human) -> bool:
+    def add_human(self, human) -> bool:
         """
         Adding one player into the list of humans to handle at each round
 
@@ -73,11 +72,11 @@ class GameController:
             # Given human isn't a player
             return False
 
-    def removePlayer(self, player_uuid) -> bool:
+    def remove_player(self, player_uuid) -> bool:
         """
         Removing one player
 
-        :param human: Player's id to remove
+        :param player_uuid: Player's id to remove
         :type arg1: Player
         """
         if len(self.humans_list) > 2:
@@ -91,20 +90,20 @@ class GameController:
         # Id not found
         return False
 
-    def resetAllHumans(self):
+    def reset_all_humans(self):
         """Resetting all humans : no more player and new dealer"""
         self.humans_list = []
         self.dealer = Dealer()
 
-    def firstRound(self):
+    def first_round(self):
         """
         First round allow the players to bet them deal the card for everybody
         :return: bool : state of the round
         """
 
         for human in self.humans_list:
-            human.clearHands()
-        self.dealer.clearHand()
+            human.clear_hands()
+        self.dealer.clear_hand()
 
         # loop only for betting. Betting buttons should be the only one modifiable
         for human in self.humans_list:
@@ -124,19 +123,18 @@ class GameController:
                     print(human.name + " is betting")
                     state = False
 
-        #loop to deal hands to everybody
+        # loop to deal hands to everybody
         for human in self.humans_list:
             print(human.name + "is receiving cards.")
             # at initialization we only change the first hand of the player with 2 cards
-            human.addCard(self.deck.getCard(), 0)
-            human.addCard(self.deck.getCard(), 0)
+            human.add_card(self.deck.getCard(), 0)
+            human.add_card(self.deck.getCard(), 0)
 
-        #giving the dealer a hand (with 2 card)
-        self.dealer.addCard(self.deck.getCard())
-        self.dealer.addCard(self.deck.getCard())
+        # giving the dealer a hand (with 2 card)
+        self.dealer.add_card(self.deck.getCard())
+        self.dealer.add_card(self.deck.getCard())
 
-
-    def playOneRound(self):
+    def play_one_round(self):
         for human in self.humans_list:
             print(str(human) + " round")
             for hand_idx in range(len(human.hands)):
@@ -150,21 +148,20 @@ class GameController:
                     event = pygame.event.wait()
                     if event.type == QUIT:
                         return False
-
                     elif event.type == KEYDOWN :
                         if event.key == K_ESCAPE:
                             return False
 
-                        elif event.key in [K_1, K_KP1] :
+                        elif event.key in [K_1, K_KP1]:
                             print(1)
                             card = self.deck.getCard()
-                            human.addCard(card, hand_idx)
+                            human.add_card(card, hand_idx)
                             print("You : " + str(human.hands[hand_idx].hand))
                             if human.hands[hand_idx].hand.is_burnt or human.hands[hand_idx].hand.is_black_jack:
                                 print("Is burnt or black jack")
                                 state = False
 
-                        elif event.key in [K_2, K_KP2] :
+                        elif event.key in [K_2, K_KP2]:
                             print(2)
                             bet_amount = 5
                             hand_id = 0
@@ -173,23 +170,23 @@ class GameController:
                                 hand_id = input("Hand number for bet : ")
                             human.bet(int(bet_amount), int(hand_id))
 
-                        elif event.key in [K_3, K_KP3] :
+                        elif event.key in [K_3, K_KP3]:
                             print(3)
                             state = False
 
-                        elif event.key in [K_4, K_KP4] :
+                        elif event.key in [K_4, K_KP4]:
                             print(4)
                             hand_id = 0
-                            if len(human.hands)>=2:
+                            if len(human.hands) >= 2:
                                 print("You have %i hands" % len(human.hands))
                                 hand_id = input("Hand number for bet : ")
                             human.split(hand_id)
 
-                        elif event.key in [K_5, K_KP5] :
+                        elif event.key in [K_5, K_KP5]:
                             print(5)
                             human.double(0)
 
-                        elif event.key in [K_6, K_KP6] :
+                        elif event.key in [K_6, K_KP6]:
                             return False
 
                     elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -197,15 +194,15 @@ class GameController:
                         if self.view_game.quit_btn.isClicked(pos):
                             return False
 
-        dealer_decision = self.dealer.chooseAction()
+        dealer_decision = self.dealer.choose_action()
         print("Dealer hand : " + str(self.dealer.hand))
 
         while dealer_decision != Decision.stand:
             print(dealer_decision)
             if dealer_decision == Decision.hit:
-                self.dealer.addCard(self.deck.getCard())
+                self.dealer.add_card(self.deck.getCard())
             print("Dealer hand : " + str(self.dealer.hand))
-            dealer_decision = self.dealer.chooseAction()
+            dealer_decision = self.dealer.choose_action()
 
         print("Dealer decision : " + str(dealer_decision))
 
