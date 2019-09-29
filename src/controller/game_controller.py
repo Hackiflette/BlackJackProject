@@ -243,6 +243,9 @@ class GameController:
         """
 
         print("btn_card")
+        self.view_game.buttons["card"].set(state="disabled")
+        self.view_game.buttons["card"].draw()
+        pygame.display.flip()
 
     def btn_bet(self):
         """
