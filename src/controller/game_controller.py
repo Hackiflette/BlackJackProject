@@ -2,6 +2,7 @@ from src.views.view_game import ViewGame
 from src.humans.dealer import Dealer
 from src.humans.player import Player
 from src.cards.deck import Deck
+from src.common.constants import Decision
 
 import pygame
 from pygame.locals import (
@@ -168,7 +169,7 @@ class GameController:
                             bet_amount = 5
                             hand_id = 0
                             if len(human.hands) >= 2:
-                                print("You have " + len(human.hands) + "hands")
+                                print("You have %i hands" % len(human.hands))
                                 hand_id = input("Hand number for bet : ")
                             human.bet(int(bet_amount), int(hand_id))
 
@@ -180,7 +181,7 @@ class GameController:
                             print(4)
                             hand_id = 0
                             if len(human.hands)>=2:
-                                print("You have " + len(human.hands) + "hands")
+                                print("You have %i hands" % len(human.hands))
                                 hand_id = input("Hand number for bet : ")
                             human.split(hand_id)
 
@@ -197,5 +198,15 @@ class GameController:
                             return False
 
         dealer_decision = self.dealer.chooseAction()
-        # TODO: use dealer_decision if result is hit
+        print("Dealer hand : " + str(self.dealer.hand))
+
+        while dealer_decision != Decision.stand:
+            print(dealer_decision)
+            if dealer_decision == Decision.hit:
+                self.dealer.addCard(self.deck.getCard())
+            print("Dealer hand : " + str(self.dealer.hand))
+            dealer_decision = self.dealer.chooseAction()
+
+        print("Dealer decision : " + str(dealer_decision))
+
         return True
