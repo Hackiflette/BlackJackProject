@@ -99,6 +99,7 @@ class Player:
                 # ---- Creating the new hands ---
                 # 1 - reinitialize hands of the player
                 self.clearHands()
+                self.hands.pop()
 
                 # 2 - adding first hand with the associated bet
                 self.hands.append(PlayerHand(splitted_hand[0],
@@ -116,7 +117,7 @@ class Player:
         self.hands[index_of_the_hand_to_change].hand += card_to_add
 
     def clearHands(self):
-        self.hands = []
+        self.hands = [PlayerHand()]
 
     def __repr__(self):
         return f"Player(name = {self.name}, uuid = {self.uuid},\n" \
