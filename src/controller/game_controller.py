@@ -200,8 +200,11 @@ class GameController:
 
                     elif event.type == pygame.MOUSEBUTTONDOWN:
                         pos = pygame.mouse.get_pos()
-                        if self.view_game.quit_btn.isClicked(pos):
+                        if self.view_game.buttons["quit"].collide(pos):
                             return False
+                    
+                    for btn in self.view_game.buttons.values():
+                        btn.handle_event(event)
 
         dealer_decision = self.dealer.choose_action()
         print("Dealer hand : " + str(self.dealer.hand))

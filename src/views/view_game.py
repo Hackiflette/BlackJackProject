@@ -79,10 +79,10 @@ class ViewGame:
             ("end_turn", "End Turn", (500, 610)),
             ("split", "Split", (700, 610)),
             ("double", "Double", (900, 610)),
-            ("quit", "Quit", (900, 610))
+            ("quit", "Quit", (1100, 610))
         )
-        for i, (iid, text, pos) in enumerate(disp):
-            text = f"(i) {text}"
+        for i, (iid, text, pos) in enumerate(disp, 1):
+            text = f"({i}) {text}"
             b = Button(
                 self.window, text=text, pos=pos, size=(100, 80), bg_normal=(180, 180, 180)
             )
