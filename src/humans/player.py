@@ -99,6 +99,7 @@ class Player:
                 # ---- Creating the new hands ---
                 # 1 - reinitialize hands of the player
                 self.clearHands()
+                self.hands.pop()
 
                 # 2 - adding first hand with the associated bet
                 self.hands.append(PlayerHand(splitted_hand[0],
