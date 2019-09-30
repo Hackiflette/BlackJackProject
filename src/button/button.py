@@ -226,5 +226,7 @@ class Button:
 
         if self.state == State.disabled:
             s = pygame.Surface((self.rect.w, self.rect.h), pygame.SRCALPHA)
-            s.fill((255, 255, 255, 128))
+            s.fill((0, 0, 0, 128))
             self.window.blit(s, (self.rect.x, self.rect.y))
+        
+        pygame.display.update(self.rect)
