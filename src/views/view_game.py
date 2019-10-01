@@ -74,17 +74,17 @@ class ViewGame:
         )
 
         disp = (
-            ("card", "Carte", (100, 610)),
-            ("bet", "Bet", (300, 610)),
-            ("end_turn", "End Turn", (500, 610)),
-            ("split", "Split", (700, 610)),
-            ("double", "Double", (900, 610)),
-            ("quit", "Quit", (1100, 610))
+            ("card", "Carte", (40, 610)),
+            ("bet", "Bet", (240, 610)),
+            ("end_turn", "End Turn", (440, 610)),
+            ("split", "Split", (640, 610)),
+            ("double", "Double", (840, 610)),
+            ("quit", "Quit", (1040, 610))
         )
         for i, (iid, text, pos) in enumerate(disp, 1):
             text = f"({i}) {text}"
             b = Button(
-                self.window, text=text, pos=pos, size=(100, 80), bg_normal=(180, 180, 180)
+                self.window, text=text, pos=pos, size=(120, 74), bg_normal=(180, 180, 180)
             )
             b.draw()
             self.buttons[iid] = b
