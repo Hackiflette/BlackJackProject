@@ -15,6 +15,7 @@ class State(enum.Enum):
     normal = enum.auto()
     hover = enum.auto
     pressed = enum.auto()
+    disabled = enum.auto()
 
 
 # =============================================================================
@@ -139,6 +140,14 @@ class Button:
     # =========================================================================
     # = Public methods
     # =========================================================================
+
+    def execute(self, *args, **kwargs):
+        """
+        Emit the signals attached to this button if it's not disabled
+        """
+
+        if self.state != State.disabled:
+            self.signal.emit(*args, **kwargs)
 
     def collide(self, pos):
         """
