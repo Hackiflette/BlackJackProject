@@ -243,7 +243,7 @@ class GameController:
         """
 
         print("btn_card")
-        self.view_game.buttons["card"].set(state="disabled")
+        self.view_game.buttons["card"].disable()
         self.view_game.buttons["card"].draw()
 
     def btn_bet(self):
