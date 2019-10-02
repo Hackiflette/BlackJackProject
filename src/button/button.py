@@ -24,7 +24,6 @@ class State(enum.Enum):
 # =============================================================================
 
 
-# TODO: Possibility to disable a button
 class Button:
     """
     Set attributes to the button

@@ -36,10 +36,11 @@ class GameController:
         self.view_game = None
         self.player_wallet = 500
         self.deck = Deck()
-        self.state = False
+        # Game loop variables
+        self.playing = False
+        self.quit = False
         self.human = None
         self.hand_idx = None
-        self.quit = False
         # self.view_game = View_game(window, view_config)
 
     def game_launch(self):
@@ -115,32 +116,43 @@ class GameController:
             human.clear_hands()
         self.dealer.clear_hand()
 
+        # Set buttons state 
+        self.view_game.buttons["card"].disable()
+        self.view_game.buttons["bet"].enable()
+        self.view_game.buttons["end_turn"].disable()
+        self.view_game.buttons["split"].disable()
+        self.view_game.buttons["double"].disable()
+        self.view_game.buttons["quit"].enable()
+
         # loop only for betting. Betting buttons should be the only one modifiable
-        for human in self.humans_list:
-            print(human.name + " is betting.")
-            state = True
-            while state:
+        for self.human in self.humans_list:
+            print(self.human.name + " is betting.")
+            self.quit = False
+            self.playing = True
+            while self.playing:
                 event = pygame.event.wait()
                 if event.type == QUIT:
                     return False
                 elif event.type == KEYDOWN and event.key == K_ESCAPE:
                     return False
-                elif event.type == pygame.MOUSEBUTTONUP:
-                    pos = pygame.mouse.get_pos()
-                    if self.view_game.buttons["quit"].collide(pos):
-                        return False
-                else:
-                    print(human.name + " is betting")
-                    state = False
+                elif event.type == KEYDOWN :
+                    if event.key in [K_2, K_KP2]:
+                        self.view_game.buttons["bet"].execute()
+                    elif event.key in [K_6, K_KP6]:
+                        self.view_game.buttons["quit"].execute()
+
                 for btn in self.view_game.buttons.values():
                     btn.handle_event(event)
+                
+                if self.quit:
+                    return False
 
         # loop to deal hands to everybody
-        for human in self.humans_list:
-            print(human.name + "is receiving cards.")
+        for self.human in self.humans_list:
+            print(self.human.name + "is receiving cards.")
             # at initialization we only change the first hand of the player with 2 cards
-            human.add_card(self.deck.getCard(), 0)
-            human.add_card(self.deck.getCard(), 0)
+            self.human.add_card(self.deck.getCard(), 0)
+            self.human.add_card(self.deck.getCard(), 0)
 
         # giving the dealer a hand (with 2 card)
         self.dealer.add_card(self.deck.getCard())
@@ -156,15 +168,14 @@ class GameController:
                 # Manage interfaces
                 # Let human choose
                 self.quit = False
-                self.state = True
-                while self.state:
+                self.playing = True
+                while self.playing:
                     event = pygame.event.wait()
                     if event.type == QUIT:
                         return False
                     elif event.type == KEYDOWN :
                         if event.key == K_ESCAPE:
                             return False
-
                         elif event.key in [K_1, K_KP1]:
                             self.view_game.buttons["card"].execute()
                         elif event.key in [K_2, K_KP2]:
@@ -225,11 +236,9 @@ class GameController:
         print("You : " + str(self.human.hands[self.hand_idx].hand))
         if self.human.hands[self.hand_idx].hand.is_burnt or self.human.hands[self.hand_idx].hand.is_black_jack:
             print("Is burnt or black jack")
-            self.state = False
+            self.playing = False
 
         print("btn_card")
-        self.view_game.buttons["card"].disable()
-        self.view_game.buttons["card"].draw()
 
     def btn_bet(self):
         """
@@ -250,7 +259,7 @@ class GameController:
         Manage actions on end turn button
         """
 
-        self.state = False
+        self.playing = False
 
         print("btn_end_turn")
 
@@ -281,8 +290,6 @@ class GameController:
         Manage quit on quit button
         """
 
-        print(self.quit)
         self.quit = True
-        print(self.quit)
 
         print("btn_quit")

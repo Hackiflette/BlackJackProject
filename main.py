@@ -115,8 +115,9 @@ class Main:
                 elif event.type == KEYDOWN and event.key == K_ESCAPE:
                     state = Game.menu
                 elif event.type:
-                    self.ctrl.first_round()
-                    keep_playing = self.ctrl.play_one_round()
+                    keep_playing = self.ctrl.first_round()
+                    if keep_playing:
+                        keep_playing = self.ctrl.play_one_round()
                     if not keep_playing:
                         # Player want to quit
                         state = Game.menu
