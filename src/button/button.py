@@ -155,6 +155,7 @@ class Button:
         """
 
         self.enabled = True
+        self.draw()
     
     def disable(self):
         """
@@ -162,6 +163,7 @@ class Button:
         """
 
         self.enabled = False
+        self.draw()
 
     def collide(self, pos):
         """
