@@ -13,7 +13,7 @@ from src.common.utils import Signal
 
 class State(enum.Enum):
     normal = enum.auto()
-    hover = enum.auto
+    hover = enum.auto()
     pressed = enum.auto()
 
 
