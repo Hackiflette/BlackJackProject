@@ -141,6 +141,14 @@ class Button:
     # = Public methods
     # =========================================================================
 
+    def execute(self, *args, **kwargs):
+        """
+        Emit the signals attached to this button if it's not disabled
+        """
+
+        if self.enabled:
+            self.signal.emit(*args, **kwargs)
+
     def enable(self):
         """
         Enable the button.
