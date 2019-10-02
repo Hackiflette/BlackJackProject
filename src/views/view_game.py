@@ -84,7 +84,7 @@ class ViewGame:
         for i, (iid, text, pos) in enumerate(disp, 1):
             text = f"({i}) {text}"
             b = Button(
-                self.window, text=text, pos=pos, size=(120, 74), bg_normal=(180, 180, 180)
+                self.window, text=text, pos=pos, size=(120, 74), bg_normal=(30, 190, 130)
             )
             b.draw()
             self.buttons[iid] = b

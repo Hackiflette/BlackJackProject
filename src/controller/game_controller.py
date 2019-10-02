@@ -228,6 +228,8 @@ class GameController:
             self.state = False
 
         print("btn_card")
+        self.view_game.buttons["card"].disable()
+        self.view_game.buttons["card"].draw()
 
     def btn_bet(self):
         """
