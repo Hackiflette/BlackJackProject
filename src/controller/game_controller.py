@@ -243,13 +243,15 @@ class GameController:
         """
 
         print("btn_card")
+        self.view_game.buttons["card"].disable()
+        self.view_game.buttons["card"].draw()
 
     def btn_bet(self):
         """
         Manage actions on bet button
         """
 
-        print("btn_btn")
+        print("btn_bet")
 
     def btn_end_turn(self):
         """

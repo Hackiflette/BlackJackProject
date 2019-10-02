@@ -116,8 +116,7 @@ def main(window: pygame.Surface, menu_config: dict, menu_buttons: dict):
             if event.type == QUIT:
                 state = Game.quit
             elif event.type == KEYDOWN and event.key == K_RETURN:
-                # state = Game.play
-                state = btns_list[btn_index].value
+                btns_list[btn_index].signal.emit()
             elif event.type == KEYDOWN and event.key == K_s:
                 state = Game.play
             elif event.type == KEYDOWN and event.key == K_o:
