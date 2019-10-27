@@ -68,6 +68,22 @@ class GameController:
 
     def refresh(self):
         self.view_game.refresh()
+    
+    def enable_buttons(self, *btn_names):
+        """
+        Enable the given buttons
+        """
+
+        for btn in btn_names:
+            self.view_game.buttons[btn].disable()
+    
+    def disable_buttons(self, *btn_names):
+        """
+        Disable the given buttons
+        """
+
+        for btn in btn_names:
+
 
     def add_human(self, human) -> bool:
         """
@@ -116,13 +132,9 @@ class GameController:
             human.clear_hands()
         self.dealer.clear_hand()
 
-        # Set buttons state 
-        self.view_game.buttons["card"].disable()
-        self.view_game.buttons["bet"].enable()
-        self.view_game.buttons["end_turn"].disable()
-        self.view_game.buttons["split"].disable()
-        self.view_game.buttons["double"].disable()
-        self.view_game.buttons["quit"].enable()
+        # Set buttons state
+        self.enable_buttons("bet", "quit")
+        self.disable_buttons("card", "end_turn", "split", "double")
 
         # loop only for betting. Betting buttons should be the only one modifiable
         for self.human in self.humans_list:
