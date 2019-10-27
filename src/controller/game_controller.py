@@ -108,7 +108,7 @@ class GameController:
         """
         if len(self.humans_list) > 2:
             for i in range(len(self.humans_list[:-1])):
-                if self.humans_list[i].uuid == player_uuid :
+                if self.humans_list[i].uuid == player_uuid:
                     self.humans_list = self.humans_list[:i] + self.humans_list[i+1:]
                     return True
         else:
@@ -150,6 +150,8 @@ class GameController:
                 elif event.type == KEYDOWN :
                     if event.key in [K_2, K_KP2]:
                         self.view_game.buttons["bet"].execute()
+                    elif event.key in [K_3, K_KP3]:
+                        self.view_game.buttons["end_turn"].execute()
                     elif event.key in [K_6, K_KP6]:
                         self.view_game.buttons["quit"].execute()
 
@@ -169,8 +171,15 @@ class GameController:
         # giving the dealer a hand (with 2 card)
         self.dealer.add_card(self.deck.getCard())
         self.dealer.add_card(self.deck.getCard())
+        print("End bet_round")
+        return True
 
     def play_one_round(self):
+
+        # Set buttons state
+        self.enable_buttons("card", "end_turn", "quit")
+        self.disable_buttons("bet", "split", "double")
+
         for self.human in self.humans_list:
             print(str(self.human) + " round")
             for self.hand_idx in range(len(self.human.hands)):
@@ -185,7 +194,7 @@ class GameController:
                     event = pygame.event.wait()
                     if event.type == QUIT:
                         return False
-                    elif event.type == KEYDOWN :
+                    elif event.type == KEYDOWN:
                         if event.key == K_ESCAPE:
                             return False
                         elif event.key in [K_1, K_KP1]:
@@ -263,6 +272,8 @@ class GameController:
             print("You have %i hands" % len(self.human.hands))
             hand_id = input("Hand number for bet : ")
         self.human.bet(int(bet_amount), int(hand_id))
+        print(f"Hand amount {self.human.hands[hand_id].hand_bet} in the {hand_id}")
+        self.enable_buttons("end_turn")
 
         print("btn_bet")
 
