@@ -1,6 +1,7 @@
+import json
+
 from dataclasses import dataclass, field
 from typing import Optional, List, Tuple
-
 from marshmallow import fields, Schema, post_load
 
 from src.common.constants import CONFIG_GAME_VIEW
@@ -102,6 +103,6 @@ class GameViewSchema(Schema):
 
 game_view_schema = GameViewSchema()
 game_view_config, _ = game_view_schema.loads(
-    CONFIG_GAME_VIEW
+    json.dumps(CONFIG_GAME_VIEW)
 )
 # TODO: Add tests for loading
