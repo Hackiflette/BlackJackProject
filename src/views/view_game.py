@@ -4,6 +4,7 @@ import pygame
 
 from src.button import Button
 from src.cards.card import Card
+from src.common.constants import CONFIG_GAME_VIEW
 from src.common.func_pictures import load_image
 from src.common.game_view_config import game_view_config
 from src.views.card_area_organizer import CardAreaOrganizer
@@ -66,31 +67,18 @@ class ViewGame:
 
     def init_game_btns(self):
         # Display game buttons area
-        cfg_btns = game_view_config.game_buttons
+        cfg_btns = game_view_config.game_menu_area
         pygame.draw.rect(
             self.window,
             cfg_btns.color,
             (cfg_btns.x, cfg_btns.y, cfg_btns.width, cfg_btns.height),
         )
 
-        disp = (
-            ("card", "Carte", (40, 610)),
-            ("bet", "Bet", (240, 610)),
-            ("end_turn", "End Turn", (440, 610)),
-            ("split", "Split", (640, 610)),
-            ("double", "Double", (840, 610)),
-            ("quit", "Quit", (1040, 610))
-        )
-        for i, (iid, text, pos) in enumerate(disp, 1):
-            text = f"({i}) {text}"
+        # FIXME: Use the config instance instead
+        for iid, btn_params in CONFIG_GAME_VIEW["game_buttons"].items():
             b = Button(
                 self.window,
-                text=text,
-                pos=pos,
-                size=(120, 74),
-                bg_normal=(30, 190, 130),
-                bg_hover=(30, 190, 130),
-                bg_pressed=(30, 135, 90)
+                **btn_params
             )
             b.draw()
             self.buttons[iid] = b
