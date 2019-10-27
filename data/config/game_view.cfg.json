@@ -7,7 +7,7 @@
     },
     "game_buttons": {
         "card": {
-            "text": " (1) Card",
+            "text": "(1) Card",
             "pos": [40, 610],
             "size": [120, 74],
             "bg_normal": [30, 193, 130],
