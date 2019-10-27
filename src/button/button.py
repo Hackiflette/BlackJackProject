@@ -24,7 +24,6 @@ class State(enum.Enum):
 # =============================================================================
 
 
-# TODO: Possibility to disable a button
 class Button:
     """
     Set attributes to the button
@@ -155,6 +154,7 @@ class Button:
         """
 
         self.enabled = True
+        self.draw()
     
     def disable(self):
         """
@@ -162,6 +162,7 @@ class Button:
         """
 
         self.enabled = False
+        self.draw()
 
     def collide(self, pos):
         """

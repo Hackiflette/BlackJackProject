@@ -1,6 +1,7 @@
+import json
+
 from dataclasses import dataclass, field
 from typing import Optional, List, Tuple
-
 from marshmallow import fields, Schema, post_load
 
 from src.common.constants import CONFIG_GAME_VIEW
@@ -76,7 +77,7 @@ class GameView:
     window: AreaDefinitionSchema
     cards: Dimensions
     tokens: Dimensions
-    game_buttons: AreaDefinitionSchema
+    game_menu_area: AreaDefinitionSchema
 
 
 class GameViewSchema(Schema):
@@ -84,7 +85,7 @@ class GameViewSchema(Schema):
     window = fields.Nested(AreaDefinitionSchema())
     cards = fields.Nested(DimensionsSchema())
     tokens = fields.Nested(DimensionsSchema())
-    game_buttons = fields.Nested(AreaDefinitionSchema())
+    game_menu_area = fields.Nested(AreaDefinitionSchema())
 
     def load(self, config: dict, **kwargs) -> Tuple[GameView, dict]:
         """
@@ -102,6 +103,6 @@ class GameViewSchema(Schema):
 
 game_view_schema = GameViewSchema()
 game_view_config, _ = game_view_schema.loads(
-    CONFIG_GAME_VIEW
+    json.dumps(CONFIG_GAME_VIEW)
 )
 # TODO: Add tests for loading
