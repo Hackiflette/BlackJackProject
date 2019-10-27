@@ -76,7 +76,7 @@ class GameView:
     window: AreaDefinitionSchema
     cards: Dimensions
     tokens: Dimensions
-    game_buttons: AreaDefinitionSchema
+    game_menu_area: AreaDefinitionSchema
 
 
 class GameViewSchema(Schema):
@@ -84,7 +84,7 @@ class GameViewSchema(Schema):
     window = fields.Nested(AreaDefinitionSchema())
     cards = fields.Nested(DimensionsSchema())
     tokens = fields.Nested(DimensionsSchema())
-    game_buttons = fields.Nested(AreaDefinitionSchema())
+    game_menu_area = fields.Nested(AreaDefinitionSchema())
 
     def load(self, config: dict, **kwargs) -> Tuple[GameView, dict]:
         """
