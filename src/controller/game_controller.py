@@ -75,7 +75,7 @@ class GameController:
         """
 
         for btn in btn_names:
-            self.view_game.buttons[btn].disable()
+            self.view_game.buttons[btn].enable()
     
     def disable_buttons(self, *btn_names):
         """
@@ -83,6 +83,7 @@ class GameController:
         """
 
         for btn in btn_names:
+            self.view_game.buttons[btn].disable()
 
     def add_human(self, human) -> bool:
         """
