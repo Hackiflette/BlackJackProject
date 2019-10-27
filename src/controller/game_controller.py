@@ -84,7 +84,6 @@ class GameController:
 
         for btn in btn_names:
 
-
     def add_human(self, human) -> bool:
         """
         Adding one player into the list of humans to handle at each round
