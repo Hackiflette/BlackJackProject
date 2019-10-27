@@ -273,7 +273,7 @@ class GameController:
             hand_id = input("Hand number for bet : ")
         self.human.bet(int(bet_amount), int(hand_id))
         print(f"Hand amount {self.human.hands[hand_id].hand_bet} in the {hand_id}")
-        self.view_game.buttons["end_turn"].enable()
+        self.enable_buttons("end_turn")
 
         print("btn_bet")
 
