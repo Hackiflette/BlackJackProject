@@ -3,6 +3,7 @@ from src.humans.dealer import Dealer
 from src.humans.player import Player
 from src.cards.deck import Deck
 from src.common.constants import Decision
+from src.controller.card_area_organizer import CardAreaOrganizer
 
 import pygame
 from pygame.locals import (
@@ -42,6 +43,19 @@ class GameController:
         self.quit = False
         # self.view_game = View_game(window, view_config)
 
+        # Organizers
+        self.card_area_organizer = CardAreaOrganizer()
+
+        self.organizers = (
+            self.card_area_organizer,
+        )
+
+        self.subscribe_to_organizers()
+
+    def subscribe_to_organizers(self):
+        for organizer in self.organizers:
+            organizer.areas_updated.attach(self.refresh)
+
     def game_launch(self):
         self.view_game = ViewGame(self.window)
         self.view_game.buttons["card"].signal.attach(self.btn_card)
@@ -66,7 +80,7 @@ class GameController:
             self.add_human(Player(name_of_player, self.player_wallet))
 
     def refresh(self):
-        self.view_game.refresh()
+        self.view_game.refresh(self.card_area_organizer)
 
     def add_human(self, human) -> bool:
         """
@@ -114,6 +128,7 @@ class GameController:
         for human in self.humans_list:
             human.clear_hands()
         self.dealer.clear_hand()
+        self.card_area_organizer.clear_areas()
 
         # loop only for betting. Betting buttons should be the only one modifiable
         for human in self.humans_list:
@@ -139,12 +154,22 @@ class GameController:
         for human in self.humans_list:
             print(human.name + "is receiving cards.")
             # at initialization we only change the first hand of the player with 2 cards
+            human_card = self.deck.getCard()
+            human.add_card(human_card, 0)
+            self.card_area_organizer.add_card(human_card, "player", 0)
+
+            human_card = self.deck.getCard()
             human.add_card(self.deck.getCard(), 0)
-            human.add_card(self.deck.getCard(), 0)
+            self.card_area_organizer.add_card(human_card, "player", 0)
 
         # giving the dealer a hand (with 2 card)
-        self.dealer.add_card(self.deck.getCard())
-        self.dealer.add_card(self.deck.getCard())
+        dealer_card = self.deck.getCard()
+        self.dealer.add_card(dealer_card)
+        self.card_area_organizer.add_card(dealer_card, "dealer", 0)
+
+        dealer_card = self.deck.getCard()
+        self.dealer.add_card(dealer_card)
+        self.card_area_organizer.add_card(dealer_card, "dealer", 0)
 
     def play_one_round(self):
         for self.human in self.humans_list:
@@ -190,7 +215,9 @@ class GameController:
         while dealer_decision != Decision.stand:
             print(dealer_decision)
             if dealer_decision == Decision.hit:
-                self.dealer.add_card(self.deck.getCard())
+                dealer_card = self.deck.getCard()
+                self.dealer.add_card(dealer_card)
+                self.card_area_organizer.add_card(dealer_card, "dealer", 0)
             print("Dealer hand : " + str(self.dealer.hand))
             dealer_decision = self.dealer.choose_action()
 
@@ -226,6 +253,9 @@ class GameController:
         if self.human.hands[self.hand_idx].hand.is_burnt or self.human.hands[self.hand_idx].hand.is_black_jack:
             print("Is burnt or black jack")
             self.state = False
+
+        print("add card into card organizer for display purpose")
+        self.card_area_organizer.add_card(card, "player",  self.hand_idx)
 
         print("btn_card")
         self.view_game.buttons["card"].disable()
@@ -286,3 +316,11 @@ class GameController:
         print(self.quit)
 
         print("btn_quit")
+
+    @classmethod
+    def get_card_organizer(cls):
+        """
+        give the card organizer
+        :return: CardAreaOrganizer
+        """
+        return cls.card_area_organizer
